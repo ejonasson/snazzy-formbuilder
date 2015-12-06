@@ -1,14 +1,17 @@
 @extends('templates/base')
 
 @section('content')
-    <h1>{{$form->name}} <small><a href="/forms/{{$form->id}}/edit">Edit</a></small></h1>
-    <div class="form-description">
-        {{$form->description}}
-    </div>
-    @foreach($form->fields as $field)
-        <div class="form-group">
-            <label for="{{$field->id}}">{{$field->name}}</label>
-            <input type="{{$field->type}}" name="{{$field->id}}" class="form-control">
+    <form method="POST" action="/forms/{{$form->id}}/submit">
+        {!! csrf_field() !!}    
+        <h1>{{$form->name}} <small><a href="/forms/{{$form->id}}/edit">Edit</a></small></h1>
+        <div class="form-description">
+            {{$form->description}}
         </div>
-    @endforeach
+        <div class="form-field">
+            @include('customForms.partials._render-field')
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 @stop

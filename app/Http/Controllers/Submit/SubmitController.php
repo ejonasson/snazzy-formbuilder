@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Field;
+namespace App\Http\Controllers\Submit;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Form;
+use App\Submission;
+use \stdClass;
 
-use App\Field;
-
-class FieldController extends Controller
+class SubmitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,6 @@ class FieldController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +28,7 @@ class FieldController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,9 +37,15 @@ class FieldController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $submission = new Submission;
+        $form = Form::findorfail($id);
+        $inputs = $request->all();
+        $submission->submission = $this->_prepareSubmission($inputs, $form);
+        $submission->form_id = $id;
+        $submission->save();
+
     }
 
     /**
@@ -50,7 +56,9 @@ class FieldController extends Controller
      */
     public function show($id)
     {
-        //
+        $submission = Submission::findorfail($id);
+        $data = $submission->getSubmissionData();
+        return view('submissions.show', ['response' => $data]);
     }
 
     /**
@@ -84,9 +92,21 @@ class FieldController extends Controller
      */
     public function destroy($id)
     {
-        $field = Field::findOrFail($id);
-        $field->delete();
-        return response()->json(['status' => 'success']);
-
+        //
+    }
+    protected function _prepareSubmission($inputs, Form $form)
+    {
+        // We don't need the CSRF token, so drop it
+        unset($inputs['_token']);
+        $submission_data = [];
+        foreach ($inputs as $field_id => $field_value) {
+            $field = $form->fields->find($field_id);
+            $single_submission = new StdClass;
+            $single_submission->id = $field_id;
+            $single_submission->name = $field->name;
+            $single_submission->value = $field_value;
+            $submission_data[] = $single_submission;
+        }
+        return json_encode($submission_data);
     }
 }

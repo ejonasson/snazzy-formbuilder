@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldTable extends Migration
+class CreateSubmissionMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,13 @@ class CreateFieldTable extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('type');
+            $table->string('submission');
             $table->integer('form_id')->unsigned()->index();
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreign('form_id')->references('id')->on('forms');
             $table->timestamps();
-        });
-    }
+        });    }
 
     /**
      * Reverse the migrations.
@@ -30,6 +27,6 @@ class CreateFieldTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fields');
+        Schema::drop('submissions');
     }
 }

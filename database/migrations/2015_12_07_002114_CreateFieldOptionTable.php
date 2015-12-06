@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldTable extends Migration
+class CreateFieldOptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class CreateFieldTable extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('field_options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
-            $table->string('type');
-            $table->integer('form_id')->unsigned()->index();
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->string('text');
+            $table->integer('field_id')->unsigned()->index();
+            $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateFieldTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fields');
+        Schema::drop('field_options');
     }
 }
