@@ -10,6 +10,15 @@
                         <option value="{{$option->name}}">{{$option->text}}</option>
                     @endforeach
                 </select>
+            @elseif($field->type == 'radio')
+                @foreach($field->fieldOptions as $option)
+                    <div class="radio">
+                        <label>
+                            <input type="radio" class="form-control" name="{{$field->id}}" value="{{$option->name}}">
+                            {{$option->text}}
+                        </label>
+                    </div>
+                @endforeach
             @endif
         </div>
     @endforeach

@@ -35,9 +35,11 @@ class Form extends Model
         $form_fields = $this->fields->toArray();
         foreach ($form_fields as $form_field) {
             $field = $this->fields->find($form_field['id']);
+            $form_field['hasOptions'] = $field->hasOptions();
             if ($field->hasOptions()) {
                 $form_field['fieldOptions'] = $field->fieldOptions->toArray();
             }
+
             $prepared_fields[] = $form_field;
         }
         return json_encode($prepared_fields);

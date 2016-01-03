@@ -2,6 +2,21 @@
 
     .field-data {
 
+        .add-new {
+            cursor: pointer;
+        }
+        .field-options-wrapper{
+
+            clear: both;
+
+            .field-options {
+                width: 95%;
+            }
+            .delete-field {
+                margin-top: 8px;
+            }            
+        }
+
         .delete-field {
             float: right;
             cursor: pointer;

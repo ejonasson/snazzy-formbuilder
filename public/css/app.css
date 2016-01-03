@@ -1,3 +1,19 @@
+.edit-form-content .field-data .add-new {
+  cursor: pointer;
+}
+
+.edit-form-content .field-data .field-options-wrapper {
+  clear: both;
+}
+
+.edit-form-content .field-data .field-options-wrapper .field-options {
+  width: 95%;
+}
+
+.edit-form-content .field-data .field-options-wrapper .delete-field {
+  margin-top: 8px;
+}
+
 .edit-form-content .field-data .delete-field {
   float: right;
   cursor: pointer;

@@ -27,6 +27,8 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 // Field routes...
 Route::resource('forms', 'Form\FormController');
 Route::resource('fields', 'Field\FieldController');
+Route::resource('fieldOptions', 'Field\FieldOptionsController');
+
 Route::resource('submissions', 'Submit\SubmitController');
 
 

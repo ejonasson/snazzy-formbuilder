@@ -72,6 +72,7 @@ class FormController extends Controller
     {
         $form = Form::findOrFail($id);
         $form->valid_fields = $this->getFieldTypes();
+        $form->field_types_with_options = $this->getTypesWithOptions();
         $form->json_form = $form->toJson();
         $form->json_fields = $form->prepareJsonFields();
         return view('customForms.edit', ['form' => $form]);
@@ -124,18 +125,16 @@ class FormController extends Controller
     private function updateFormFields(Form $form, FormRequest $request)
     {
         foreach ($request->fields as $request_key => $request_value) {
-            // Currently, the default ID is set to 'unset'
-            // But if we change that, we need to update it here as well
-
             $field = Field::findOrNew($request_key);
-            
             $field->name = $request_value['name'];
             $field->description = $request_value['description'];
             $field->type = $request_value['type'];
             $field->form_id = $form->id;
+
             if ($field->hasOptions()) {
                 $this->updateFieldOptions($field, $request_value['fieldOptions']);
             }
+            
             $field->save();
         }
         
@@ -161,5 +160,10 @@ class FormController extends Controller
     {
         $field = new Field;
         return $field->getValidTypes();
+    }
+    private function getTypesWithOptions()
+    {
+        $field = new Field;
+        return $field->getTypesWithOptions();
     }
 }
