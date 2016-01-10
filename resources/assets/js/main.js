@@ -1,6 +1,8 @@
 Vue.config.debug = true;
 var s = require("underscore.string");
 
+
+
 var addFields = new Vue({
   el: '#add-fields',
   data: {

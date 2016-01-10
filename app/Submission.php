@@ -8,7 +8,10 @@ class Submission extends Model
 {
     public function getSubmissionData()
     {
-        return json_decode($this->submission);
+        $submission_data = json_decode($this->submission);
+        $submission_data['submission_date'] = $this->created_at->toDateString();
+        $submission_data['submission_time'] = $this->created_at->toTimeString();
+        return $submission_data;
 
     }
     public function form()

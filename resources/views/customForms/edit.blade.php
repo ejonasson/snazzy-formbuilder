@@ -29,7 +29,7 @@
     <h3>Fields</h3>
     <small>Note: we need to make this secure eventually</small>
     
-    @include('templates/js/add-fields')
+    @include('templates/js/add-fields/add-fields')
     
     
     {!! Form::close() !!}

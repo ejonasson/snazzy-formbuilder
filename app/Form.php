@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-
+use App\FormBuilder\Rules\FormRules;
 
 class Form extends Model
 {
-
     public function fields()
     {
         return $this->HasMany('App\Field');
@@ -19,10 +18,17 @@ class Form extends Model
         return $this->fields->lists('id');
     }
 
+    public function getRules()
+    {
+        $rules = new FormRules($this->rules);
+        return $rules->getRules();
+    }
+
     public function submissions()
     {
         return $this->HasMany('App\Submission');
     }
+
 
     /**
      * Prepares the Fields as a JSON object (including fieldOptions)

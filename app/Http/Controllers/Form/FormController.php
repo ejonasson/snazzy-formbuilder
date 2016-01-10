@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\FormRequest;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use App\Form;
 use App\Field;
 use App\FieldOption;
@@ -59,6 +60,9 @@ class FormController extends Controller
     public function show($id)
     {
         $form = Form::findOrFail($id);
+        foreach ($form->fields as $field) {
+            $field->view = $field->loadView();
+        }
         return view('customForms.show', ['form' => $form]);
     }
 
@@ -90,6 +94,7 @@ class FormController extends Controller
     {
 
         $form = Form::findOrFail($id);
+
         $update_form = $this->buildForm($form, $request);
         $update_form->update();
         $fields = $this->updateFormFields($form, $request);
@@ -112,12 +117,18 @@ class FormController extends Controller
      * Builds or Modifies form based on the Reqest Object
      * @param  Form        $form    Form Object
      * @param  FormRequest $request Request object
-     * @return Form               
+     * @return Form
      */
     private function buildForm(Form $form, FormRequest $request)
     {
         $form->name = $request->form_name;
         $form->description = $request->form_description;
+        if (Auth::check()) {
+            $form->user_id = Auth::user()->id;
+        } else {
+            $form->user_id = 1; // Delete this eventually
+        }
+        
         return $form;
     }
 
@@ -130,12 +141,14 @@ class FormController extends Controller
             $field->description = $request_value['description'];
             $field->type = $request_value['type'];
             $field->form_id = $form->id;
+            $field->rules = isset($request_value['rules']) ? json_encode($request_value['rules']) : null;
+
+            $field->save();
 
             if ($field->hasOptions()) {
                 $this->updateFieldOptions($field, $request_value['fieldOptions']);
             }
             
-            $field->save();
         }
         
     }

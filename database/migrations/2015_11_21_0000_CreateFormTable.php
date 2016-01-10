@@ -16,6 +16,7 @@ class CreateFormTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
+            $table->string('rules');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

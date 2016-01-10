@@ -56,7 +56,7 @@ class SubmitController extends Controller
      */
     public function show($id)
     {
-        $submission = Submission::findorfail($id);
+        $submission = Submission::findOrFail($id);
         $data = $submission->getSubmissionData();
         return view('submissions.show', ['response' => $data]);
     }
@@ -94,6 +94,24 @@ class SubmitController extends Controller
     {
         //
     }
+
+    /**
+     * Get all Submissions for a Specific Form
+     * @param  int $form_id
+     * @return \Illuminate\Http\Response
+     */
+    public function getFormSubmissions($form_id)
+    {
+        $form = Form::findOrFail($form_id);
+        $submissions = $form->submissions->all();
+        $submissions_array = [];
+        foreach ($submissions as $submission) {
+            $data = $submission->getSubmissionData();
+            $submissions_array[] = $data;
+        }
+        return view('submissions.single-form', ['submissions' => $submissions_array]);
+    }
+
     protected function _prepareSubmission($inputs, Form $form)
     {
         // We don't need the CSRF token, so drop it

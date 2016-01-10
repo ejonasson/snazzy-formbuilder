@@ -23,5 +23,11 @@ class SeedField extends Seeder
             'type' => 'select',
             'form_id' => 1
         ]);
+        DB::table('fields')->insert([
+            'name' => 'Number',
+            'description' => 'insert a number',
+            'type' => 'number',
+            'form_id' => 1
+        ]);
     }
 }
