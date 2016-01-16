@@ -45,8 +45,6 @@ class RadioFieldView extends FieldView
 
     protected function renderValidation()
     {
-        if ($this->field->isRequired()) {
-            return ' required ';
-        }
+        //
     }
 }

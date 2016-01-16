@@ -7,7 +7,7 @@ use App\Field;
 class NumberFieldView extends FieldView
 {
 
-    public $classes = array('form-control', 'input-text');
+    public $classes = array('form-control', 'input-number');
 
     public function render()
     {

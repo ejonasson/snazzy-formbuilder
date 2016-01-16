@@ -60,9 +60,6 @@ class FormController extends Controller
     public function show($id)
     {
         $form = Form::findOrFail($id);
-        foreach ($form->fields as $field) {
-            $field->view = $field->loadView();
-        }
         return view('customForms.show', ['form' => $form]);
     }
 
@@ -97,7 +94,7 @@ class FormController extends Controller
 
         $update_form = $this->buildForm($form, $request);
         $update_form->update();
-        $fields = $this->updateFormFields($form, $request);
+        $fields = $form->updateFormFields($request);
         return redirect('forms');
 
     }
@@ -130,43 +127,6 @@ class FormController extends Controller
         }
         
         return $form;
-    }
-
-
-    private function updateFormFields(Form $form, FormRequest $request)
-    {
-        foreach ($request->fields as $request_key => $request_value) {
-            $field = Field::findOrNew($request_key);
-            $field->name = $request_value['name'];
-            $field->description = $request_value['description'];
-            $field->type = $request_value['type'];
-            $field->form_id = $form->id;
-            $field->rules = isset($request_value['rules']) ? json_encode($request_value['rules']) : null;
-
-            $field->save();
-
-            if ($field->hasOptions()) {
-                $this->updateFieldOptions($field, $request_value['fieldOptions']);
-            }
-            
-        }
-        
-    }
-
-    /**
-     * Update field options
-     * @param  Field  $field
-     * @return Field with updated Options
-     */
-    public function updateFieldOptions(Field $field, $field_options)
-    {
-        foreach ($field_options as $key => $value) {
-            $option = FieldOption::findOrNew($key);
-            $option->text = $value;
-            $option->name = strtolower(str_replace(' ', '_', $value));
-            $option->field_id = $field->id;
-            $option->save();
-        }
     }
 
     private function getFieldTypes()

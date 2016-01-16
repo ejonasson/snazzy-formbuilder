@@ -9,7 +9,7 @@
         </div>
         <div class="form-field">
             @foreach($form->fields as $field)
-                {!! $field->view !!}
+                {!! $field->getView() !!}
             @endforeach
         </div>
         <div class="form-group">

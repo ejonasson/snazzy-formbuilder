@@ -42,7 +42,7 @@ class SubmitController extends Controller
         $submission = new Submission;
         $form = Form::findorfail($id);
         $inputs = $request->all();
-        $submission->submission = $this->_prepareSubmission($inputs, $form);
+        $submission->submission = $this->prepareSubmission($inputs, $form);
         $submission->form_id = $id;
         $submission->save();
 
@@ -112,7 +112,7 @@ class SubmitController extends Controller
         return view('submissions.single-form', ['submissions' => $submissions_array]);
     }
 
-    protected function _prepareSubmission($inputs, Form $form)
+    protected function prepareSubmission($inputs, Form $form)
     {
         // We don't need the CSRF token, so drop it
         unset($inputs['_token']);
@@ -122,7 +122,9 @@ class SubmitController extends Controller
             $single_submission = new StdClass;
             $single_submission->id = $field_id;
             $single_submission->name = $field->name;
+            $single_submission->type = $field->type;
             $single_submission->value = $field_value;
+
             $submission_data[] = $single_submission;
         }
         return json_encode($submission_data);

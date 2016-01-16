@@ -2,17 +2,63 @@
 
 namespace App\FormBuilder\Rules;
 
+/**
+ * "Rules" are passed in from the form editor page
+ *  And then are normalized here to be easily readable/storable.
+ */
 abstract class Rules
 {
     public $rules;
+    public $processed_rules;
 
-    public function __construct($json)
+
+    public function __construct($rules)
     {
-        $this->rules = json_decode($json);
+        $this->rules = $rules;
+        $this->processed_rules = array();
     }
 
     public function getRules()
     {
         return $this->rules;
     }
+
+    public function getProcessedRules()
+    {
+        return $this->processed_rules;
+    }
+
+    /**
+     * Checks to see if a rule exists by name
+     * Adds a true rule if it does, adds a false rule if it does not
+     * Note: value is not checked, only existence
+     * @param  string $rule_name
+     * @return $this
+     */
+    protected function processBoolean($rule_name)
+    {
+        $rule = array(
+            $rule_name => false
+            );
+
+        if (array_key_exists($rule_name, $this->rules)) {
+            $rule[$rule_name] = true;
+        }
+        $this->add($rule);
+        return $this;
+    }
+
+    /**
+     * Add a rule to the array of processed rules
+     * @param array $rule [description]
+     */
+    public function add(array $rule)
+    {
+        $this->processed_rules = array_merge($this->processed_rules, $rule);
+        return $this;
+    }
+
+
+
+    abstract public function normalize();
 }

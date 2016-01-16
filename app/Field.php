@@ -3,14 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
+use app\Field;
+use app\FieldOption;
 use App\FormBuilder\FieldView;
 use App\FormBuilder\Rules\FieldRules;
+use App\FormBuilder\FieldTypes;
 
 class Field extends Model
 {
-    protected $validTypes = ['text', 'select', 'radio', 'number'];
+    protected $validTypes = ['text', 'select', 'radio', 'number', 'checkbox'];
 
-    protected $typesWithOptions = ['select', 'radio'];
+    protected $typesWithOptions = ['select', 'radio', 'checkbox'];
 
 
     public function __construct(array $attributes = [])
@@ -43,7 +47,7 @@ class Field extends Model
     
     public function hasOptions()
     {
-        if (in_array($this->type, $this->typesWithOptions)) {
+        if ($this->typeData()->hasOptions()) {
             return true;
         }
         return false;
@@ -55,6 +59,7 @@ class Field extends Model
         return $rules->getRules();
     }
 
+
     public function isRequired()
     {
         $rules = (array) $this->getRules();
@@ -64,28 +69,24 @@ class Field extends Model
         return false;
     }
 
-    public function loadView()
+    /**
+     * Gets the type data for the Field Type
+     * @return class FieldType
+     */
+    public function typeData()
     {
-        switch ($this->type) {
-            case 'text':
-                $view = new FieldView\TextFieldView($this);
-                break;
-            case 'select':
-                $view = new FieldView\SelectFieldView($this);
-                break;
-            case 'radio':
-                $view = new FieldView\RadioFieldView($this);
-                break;
-            case 'number':
-                $view = new FieldView\NumberFieldView($this);
-                break;
-            default:
-                $view = null;
-                break;
-        }
-        if ($view) {
-            return $view->render();
-        }
-        return false;
+        $classString = 'App\FormBuilder\FieldTypes\\' . ucfirst($this->type);
+        $type = $classString . 'FieldType';
+        return new $type();
+    }
+
+    /**
+     * Loads the HTML for this Model
+     * @return HTML
+     */
+    public function getView()
+    {
+        $view = $this->typeData()->getTypeView($this);
+        return $view->render();
     }
 }
