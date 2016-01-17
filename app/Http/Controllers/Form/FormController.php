@@ -9,6 +9,7 @@ use App\Http\Requests\FormRequest;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use App\User;
 use App\Form;
 use App\Field;
 use App\FieldOption;
@@ -16,6 +17,10 @@ use Carbon\Carbon;
 
 class FormController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'create']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +28,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::all();
+        $user = Auth::user();
+        $forms = $user->forms->all();
         return view('customForms.index', ['forms' => $forms]);
     }
 

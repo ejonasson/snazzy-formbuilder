@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Submit;
 
 use Illuminate\Http\Request;
+use Event;
 
+use Auth;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Form;
 use App\Submission;
+use App\Events\FormWasSubmitted;
+
 use \stdClass;
 
 class SubmitController extends Controller
@@ -19,7 +24,9 @@ class SubmitController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $forms = $user->forms->all();
+        return view('submissions.index', ['forms' => $forms]);
     }
     /**
      * Show the form for creating a new resource.
@@ -28,7 +35,7 @@ class SubmitController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -46,6 +53,9 @@ class SubmitController extends Controller
         $submission->form_id = $id;
         $submission->save();
 
+        Event::fire(new FormWasSubmitted($form, $submission));
+
+        return view('submissions.confirmation', ['form' => $form, 'submission' => $submission]);
     }
 
     /**

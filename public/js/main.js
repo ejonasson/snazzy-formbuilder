@@ -1212,6 +1212,7 @@ var addFields = new Vue({
         description: '',
         type: 'text',
         fieldOptions: [],
+        rules: [],
         notSaved: true
       };
       addFields.fields = addFields.fields.concat(blankField);

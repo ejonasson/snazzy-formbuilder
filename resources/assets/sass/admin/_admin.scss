@@ -1,0 +1,18 @@
+// Bodies and Containers
+
+.admin-body {
+    min-height: 100%;
+    padding-bottom: 20px;
+}
+
+.admin-container {
+    background-color: $container-bg;
+    @include border-radius(5px);
+    padding-bottom: 20px;
+}
+
+// Buttons
+
+.btn-add-new {
+    margin-top: 10px;
+}

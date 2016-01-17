@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\FormWasSubmited;
+use App\Events\FormWasSubmitted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,7 +24,7 @@ class FormWasSubmittedListener
      * @param  FormWasSubmited  $event
      * @return void
      */
-    public function handle(FormWasSubmited $event)
+    public function handle(FormWasSubmitted $event)
     {
         //
     }

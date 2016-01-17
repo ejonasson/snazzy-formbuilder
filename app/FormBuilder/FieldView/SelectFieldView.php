@@ -32,4 +32,11 @@ class SelectFieldView extends FieldView
         }
         return $optionsView;
     }
+
+    protected function renderValidation()
+    {
+        if ($this->field->isRequired()) {
+            return ' required ';
+        }
+    }
 }

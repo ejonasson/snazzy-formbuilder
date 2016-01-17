@@ -4,10 +4,11 @@ namespace App\Events;
 
 use App\Events\Event;
 use App\Form;
+use App\Submission;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class FormWasSubmited extends Event
+class FormWasSubmitted extends Event
 {
     use SerializesModels;
 
@@ -18,7 +19,7 @@ class FormWasSubmited extends Event
      *
      * @return void
      */
-    public function __construct(Form $form)
+    public function __construct(Form $form, Submission $submission)
     {
         $this->form = $form;
     }

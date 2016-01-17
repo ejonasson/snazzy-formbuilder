@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     @yield('head')
 </head>
@@ -11,12 +10,13 @@
     <header class="site-header">
         @yield('header')
     </header>
-    <div class="container">
-        <div class="col-sm-3">
-            @include('partials/sidebar')
-        </div>
-        <div class="col-sm-9" id="formBuilderApp">
-            @yield('content')
+    
+    
+    <div class="body-background">
+        <div class="container body-container">
+            <div class="col-sm-12" id="formBuilderApp">
+                @yield('content')
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

@@ -1,0 +1,26 @@
+.public-body {
+    background-color: #fff;
+}
+
+// Buttons
+
+.btn-submit {
+    margin-top: 10px;
+}
+
+// End Buttons
+
+
+// Form Inputs
+
+form {
+        .input-checkbox, .input-radio {
+            width: initial;
+            height: 100%;
+            box-shadow: none;
+        }
+
+        .input-text {
+            width: 50%;
+        }
+}

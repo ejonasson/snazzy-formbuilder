@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
 // Authentication routes...
@@ -32,7 +32,7 @@ Route::resource('fieldOptions', 'Field\FieldOptionsController');
 Route::resource('submissions', 'Submit\SubmitController');
 
 // Get Submissions for a specific form
-Route::get('forms/{id}/submissions', 'Submit\SubmitController@getFormSubmissions');
+Route::get('form/{id}/submissions', 'Submit\SubmitController@getFormSubmissions');
 
 // Form Submission Routes
 Route::post('forms/{id}/submit', 'Submit\SubmitController@store');

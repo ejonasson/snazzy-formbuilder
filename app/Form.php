@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Auth;
+use App\User;
 use App\Field;
 use App\FieldOption;
 use App\Http\Requests\FormRequest;
@@ -32,6 +34,12 @@ class Form extends Model
     {
         return $this->HasMany('App\Submission');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 
 
     /**
@@ -93,5 +101,18 @@ class Form extends Model
             $option->field_id = $field->id;
             $option->save();
         }
+    }
+
+    /**
+     * Checks to see if the current user is the owner of the form
+     * Returns true if the user is owner
+     */
+    public function userIsOwner()
+    {
+        $user_id = $this->user->id;
+        if (Auth::check() && (Auth::user()->id == $user_id)) {
+            return true;
+        }
+        return false;
     }
 }

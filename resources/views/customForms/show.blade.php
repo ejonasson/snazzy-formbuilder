@@ -1,9 +1,13 @@
-@extends('templates/base')
+@extends('templates.public')
 
 @section('content')
     <form method="POST" action="/forms/{{$form->id}}/submit" id="custom-form">
         {!! csrf_field() !!}    
-        <h1>{{$form->name}} <small><a href="/forms/{{$form->id}}/edit">Edit</a></small></h1>
+        <h1>{{$form->name}} 
+            @if($form->userIsOwner())
+                <small><a href="/forms/{{$form->id}}/edit">Edit</a></small>
+            @endif
+        </h1>
         <div class="form-description">
             {{$form->description}}
         </div>
@@ -13,7 +17,7 @@
             @endforeach
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-submit">Submit</button>
         </div>
     </form>
 @stop

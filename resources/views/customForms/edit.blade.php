@@ -1,6 +1,6 @@
 
 
-@extends('templates/base')
+@extends('templates.admin')
 
 @section('title')
     Edit {{$form->name}}
