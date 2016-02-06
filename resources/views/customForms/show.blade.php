@@ -4,9 +4,9 @@
     <form method="POST" action="/forms/{{$form->id}}/submit" id="custom-form">
         {!! csrf_field() !!}    
         <h1>{{$form->name}} 
-            @if($form->userIsOwner())
+            @can('edit', $form)
                 <small><a href="/forms/{{$form->id}}/edit">Edit</a></small>
-            @endif
+            @endcan
         </h1>
         <div class="form-description">
             {{$form->description}}

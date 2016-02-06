@@ -1,13 +1,14 @@
 .edit-form-content {
 
-    .field-data {
-
         .add-new {
             cursor: pointer;
         }
+
         .field-options-wrapper{
 
             clear: both;
+            width: 50%;
+            margin-bottom: 5px;
 
             .field-options {
                 width: 95%;
@@ -22,7 +23,8 @@
             cursor: pointer;
         }
 
-    }
-
+        label.field-label {
+            margin-top: 3px;
+        }
 
 }

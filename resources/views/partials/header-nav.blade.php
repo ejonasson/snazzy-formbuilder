@@ -16,7 +16,13 @@
       <ul class="nav navbar-nav">
         <li><a href="/forms">Forms</a></li>
         <li><a href="/submissions">Submissions</a></li>
-        <li><a href="/auth/login">Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        @if(Auth::check())
+          <li><a href="/auth/logout">Logout</a></li>
+        @else
+          <li><a href="/auth/login">Login</a></li>
+        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -8,6 +8,7 @@ use App\Field;
 use App\FieldOption;
 use App\Http\Requests\FormRequest;
 use App\FormBuilder\Rules\FieldRules;
+use Gate;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\FormBuilder\Rules\FormRules;
@@ -70,6 +71,9 @@ class Form extends Model
     {
         foreach ($request->fields as $request_key => $request_value) {
             $field = Field::findOrNew($request_key);
+            if (Gate::denies('hasFormAccess', $field)) {
+                abort(403);
+            }
             $field->name = $request_value['name'];
             $field->description = $request_value['description'];
             $field->type = $request_value['type'];
@@ -79,6 +83,7 @@ class Form extends Model
             $rules_array = !empty($request_value['rules']) ? $request_value['rules'] : array();
             $rules = new FieldRules($rules_array);
             $field->rules = json_encode($rules->normalize());
+            
             $field->save();
 
             if ($field->hasOptions()) {
@@ -101,18 +106,5 @@ class Form extends Model
             $option->field_id = $field->id;
             $option->save();
         }
-    }
-
-    /**
-     * Checks to see if the current user is the owner of the form
-     * Returns true if the user is owner
-     */
-    public function userIsOwner()
-    {
-        $user_id = $this->user->id;
-        if (Auth::check() && (Auth::user()->id == $user_id)) {
-            return true;
-        }
-        return false;
     }
 }

@@ -19,7 +19,7 @@ class FormController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => 'create']);
+        $this->middleware('auth', ['only' => ['index', 'create', 'store', 'edit', 'update', 'delete']]);
     }
     /**
      * Display a listing of the resource.
@@ -30,7 +30,8 @@ class FormController extends Controller
     {
         $user = Auth::user();
         $forms = $user->forms->all();
-        return view('customForms.index', ['forms' => $forms]);
+        $json = $user->forms->toJson();
+        return view('customForms.index', ['forms' => $forms, 'json' => $json]);
     }
 
     /**
@@ -40,6 +41,7 @@ class FormController extends Controller
      */
     public function create()
     {
+        $form = new Form;
         return view('customForms.create');
     }
 
@@ -52,8 +54,10 @@ class FormController extends Controller
     public function store(FormRequest $request)
     {
         $form = new Form;
+
         $new_form = $this->buildForm($form, $request);
         $new_form->save();
+
         return redirect('forms');
     }
 
@@ -78,6 +82,7 @@ class FormController extends Controller
     public function edit($id)
     {
         $form = Form::findOrFail($id);
+        $this->authorize('edit', $form);
         $form->valid_fields = $this->getFieldTypes();
         $form->field_types_with_options = $this->getTypesWithOptions();
         $form->json_form = $form->toJson();
@@ -97,7 +102,7 @@ class FormController extends Controller
     {
 
         $form = Form::findOrFail($id);
-
+        $this->authorize('edit', $form);
         $update_form = $this->buildForm($form, $request);
         $update_form->update();
         $fields = $form->updateFormFields($request);
@@ -113,7 +118,11 @@ class FormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $form = Form::findOrFail($id);
+        $user = Auth::user();
+        $this->authorize('delete', $form);
+        $form->delete();
+        return response()->json(['status' => 'success']);
     }
 
     /**
@@ -128,8 +137,6 @@ class FormController extends Controller
         $form->description = $request->form_description;
         if (Auth::check()) {
             $form->user_id = Auth::user()->id;
-        } else {
-            $form->user_id = 1; // Delete this eventually
         }
         
         return $form;
@@ -144,5 +151,10 @@ class FormController extends Controller
     {
         $field = new Field;
         return $field->getTypesWithOptions();
+    }
+
+    protected function authCheck()
+    {
+
     }
 }

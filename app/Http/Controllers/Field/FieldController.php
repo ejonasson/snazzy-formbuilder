@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Field;
 
+use Auth;
+
 class FieldController extends Controller
 {
     /**
@@ -85,8 +87,11 @@ class FieldController extends Controller
     public function destroy($id)
     {
         $field = Field::findOrFail($id);
-        $field->delete();
-        return response()->json(['status' => 'success']);
-
+        $user = Auth::user();
+        if ($user->can('hasFormAccess', $field)) {
+            $field->delete();
+            return response()->json(['status' => 'success']);
+        }
+            return response()->json(['status' => 'error']);
     }
 }

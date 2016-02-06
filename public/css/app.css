@@ -1396,7 +1396,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -7455,7 +7455,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -7589,7 +7589,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -8307,6 +8307,7 @@ body {
 
 .admin-body {
   min-height: 100%;
+  background-color: #000;
   padding-bottom: 20px;
 }
 
@@ -8316,29 +8317,75 @@ body {
   padding-bottom: 20px;
 }
 
+.auth-container {
+  padding-top: 20px;
+}
+
+.form-index .single-form-entry {
+  border-radius: 5px;
+  border: 3px solid #eeeeee;
+  box-shadow: 4px 6px 19px -8px rgba(0, 0, 0, 0.35);
+  margin-bottom: 10px;
+}
+
+.form-index .form-title {
+  width: 100%;
+  background-color: #eeeeee;
+}
+
+.form-index .form-title h2 {
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 0;
+  border-bottom: 2px solid #777777;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.form-index .form-description {
+  padding-left: 10px;
+}
+
+.form-index .form-actions {
+  padding-left: 10px;
+  list-style-type: none;
+}
+
+.form-index .form-actions li.form-action {
+  display: inline;
+  margin-right: 10px;
+}
+
 .btn-add-new {
   margin-top: 10px;
 }
 
-.edit-form-content .field-data .add-new {
+.edit-form-content .add-new {
   cursor: pointer;
 }
 
-.edit-form-content .field-data .field-options-wrapper {
+.edit-form-content .field-options-wrapper {
   clear: both;
+  width: 50%;
+  margin-bottom: 5px;
 }
 
-.edit-form-content .field-data .field-options-wrapper .field-options {
+.edit-form-content .field-options-wrapper .field-options {
   width: 95%;
 }
 
-.edit-form-content .field-data .field-options-wrapper .delete-field {
+.edit-form-content .field-options-wrapper .delete-field {
   margin-top: 8px;
 }
 
-.edit-form-content .field-data .delete-field {
+.edit-form-content .delete-field {
   float: right;
   cursor: pointer;
+}
+
+.edit-form-content label.field-label {
+  margin-top: 3px;
 }
 
 .public-body {

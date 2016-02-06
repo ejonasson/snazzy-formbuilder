@@ -5,3 +5,46 @@
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
+
+@mixin light-box-shadow  {
+    -webkit-box-shadow: 4px 6px 19px -8px rgba(0,0,0,0.35);
+    -moz-box-shadow: 4px 6px 19px -8px rgba(0,0,0,0.35);
+    box-shadow: 4px 6px 19px -8px rgba(0,0,0,0.35);
+
+}
+
+// Padding Mixins
+
+$light-padding: 5px;
+$medium-padding: 10px;
+$heavy-padding: 20px;
+
+@mixin padding-top-light {
+    padding-top: $light-padding;
+}
+@mixin padding-top-medium {
+    padding-top: $medium-padding;
+}
+@mixin padding-bottom-heavy {
+    padding-top: $heavy-padding;
+}
+
+@mixin padding-bottom-light {
+    padding-bottom: $light-padding;
+}
+@mixin padding-bottom-medium {
+    padding-bottom: $medium-padding;
+}
+@mixin padding-bottom-heavy {
+    padding-bottom: $heavy-padding;
+}
+
+@mixin padding-left-light {
+    padding-left: $light-padding;
+}
+@mixin padding-left-medium {
+    padding-left: $medium-padding;
+}
+@mixin padding-left-heavy {
+    padding-left: $heavy-padding;
+}

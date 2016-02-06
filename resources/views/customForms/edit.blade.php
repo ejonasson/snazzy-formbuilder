@@ -17,17 +17,16 @@
     {!! csrf_field() !!}
     
     <div class="form-group">
-        <label for="form_name">Form Name</label>
+        <label class="form-name" for="form_name">Form Name</label>
         <input class="form-control" type="text" name="form_name" value="{{ $form->name }}">
     </div>
     
     <div class="form-group">
-        <label for="form_description">Form Description</label>
+        <label class="form-description" for="form_description">Form Description</label>
         <textarea class="form-control" name="form_description" id="" cols="30" rows="5">{{$form->description}}</textarea>
     </div>
     
     <h3>Fields</h3>
-    <small>Note: we need to make this secure eventually</small>
     
     @include('templates/js/add-fields/add-fields')
     

@@ -1,8 +1,9 @@
 
 
-@import './dev/variables.scss';
 
 @import './vendor/bootstrap/_bootstrap.scss';
+
+@import './dev/variables.scss';
 @import './dev/mixins.scss';
 
 html, body {

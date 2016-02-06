@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use app\Field;
-use app\FieldOption;
+use App\Field;
+use App\FieldOption;
 use App\FormBuilder\FieldView;
 use App\FormBuilder\Rules\FieldRules;
 use App\FormBuilder\FieldTypes;

@@ -32,7 +32,7 @@ class CheckboxFieldView extends FieldView
 
     }
 
-    protected function renderValidation()
+    public function renderValidation()
     {
         if ($this->field->isRequired()) {
             return ' required ';

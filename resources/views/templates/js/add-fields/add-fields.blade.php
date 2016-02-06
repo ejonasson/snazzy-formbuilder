@@ -2,23 +2,23 @@
     <template v-for="field in fields">
         <div class="field-data well well-sm field-@{{field.id}}">
             <span class="delete-field"><a v-on:click="deleteField(field.id)">X</a></span>
-            <label>Field Name</label>
+            <label class="field-label field-name">Field Name</label>
             <input type="text" class ="form-control" name="fields[@{{field.id}}][name]" v-model="field.name">
             
-            <label>Field Description</label>
+            <label class="field-label field-description">Field Description</label>
             <textarea class ="form-control"
             name="fields[@{{field.id}}][description]"
             v-model="field.description">
             </textarea>
             
-            <label>Field Type</label>
+            <label class="field-label field-type">Field Type</label>
             @include('templates/js/add-fields/partials/_field-type')
            
                 <template v-if = "fieldHasOptions(field.id)"> 
-                    <label>Field Options</label>
+                    <label class="field-label field-option">Field Options</label>
                     @include('templates/js/add-fields/partials/_field-options')
                 </template>  
-            <label>Field Rules</label>
+            <label class="field-label field-rules">Field Rules</label>
             @include('templates/js/add-fields/partials/_field-rules')
         </div>
     </template>

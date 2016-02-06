@@ -4,21 +4,14 @@ namespace App\FormBuilder\FieldView;
 
 use App\Field;
 
-abstract class FieldView
+interface FieldRendering
 {
-
-    public $field;
-    protected $type;
-
     abstract public function render();
-    abstract protected function renderValidation();
+    abstract public function renderValidation();
+}
 
-    public function __construct(Field $field)
-    {
-        $this->field = $field;
-        $this->type = $field->type;
-    }
-
+trait renderFieldDetails
+{
     public function renderTitle()
     {
         return '<h2>' . $this->field->name . '</h2>';
@@ -33,4 +26,19 @@ abstract class FieldView
     {
         return $this->type;
     }
+}
+
+abstract class FieldView implements FieldRendering
+{
+
+    public $field;
+    protected $type;
+
+    public function __construct(Field $field)
+    {
+        $this->field = $field;
+        $this->type = $field->type;
+    }
+
+    use renderFieldDetails;
 }

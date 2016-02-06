@@ -43,7 +43,7 @@ class RadioFieldView extends FieldView
         return $optionsView;
     }
 
-    protected function renderValidation()
+    public function renderValidation()
     {
         //
     }

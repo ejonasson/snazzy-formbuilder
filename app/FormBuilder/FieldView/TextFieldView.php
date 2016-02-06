@@ -20,7 +20,7 @@ class TextFieldView extends FieldView
         return $view;
     }
 
-    protected function renderValidation()
+    public function renderValidation()
     {
         if ($this->field->isRequired()) {
             return ' required ';
