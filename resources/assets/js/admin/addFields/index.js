@@ -1,5 +1,7 @@
 var s = require("underscore.string");
 
+if ($('#add-fields').length > 0) {
+
 var addFields = new Vue({
   el: '#add-fields',
   data: {
@@ -109,3 +111,4 @@ var addFields = new Vue({
     }
   }
 });
+}

@@ -1184,147 +1184,152 @@ module.exports = function wrap(str, options){
 
 var s = require("underscore.string");
 
-var addFields = new Vue({
-  el: '#add-fields',
-  data: {
-    form: [],
-    fields: []
-  },
-  created: function created() {
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    this.parseData();
-    $('#add_new_field').click(this.addEmptyField);
-    this.addEmptyField;
-  },
-  methods: {
-    parseData: function parseData() {
-      this.form = JSON.parse($('#form-json').first().text());
-      this.fields = JSON.parse($('#fields-json').first().text());
-    },
-    addEmptyField: function addEmptyField() {
-      var blankField = {
-        id: Math.random().toString(36),
-        name: '',
-        description: '',
-        type: 'text',
-        fieldOptions: [],
-        rules: [],
-        notSaved: true
-      };
-      addFields.fields = addFields.fields.concat(blankField);
-    },
-    deleteField: function deleteField(field_id) {
-      if (confirm('Are you sure you would like to delete this field?')) {
-        var field = _.findWhere(this.fields, { id: field_id });
-        var fieldClass = '.field-' + field.id;
-        var fieldURL = '/fields/' + field.id;
+if ($('#add-fields').length > 0) {
 
-        // Check for the "notSaved key"
-        if (typeof field.notSaved === 'undefined') {
-          $.ajax({
-            url: fieldURL,
-            type: 'DELETE',
-            success: function success(result) {
-              $(fieldClass).fadeOut();
-            }
-          });
+  var addFields = new Vue({
+    el: '#add-fields',
+    data: {
+      form: [],
+      fields: []
+    },
+    created: function created() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         }
-
-        // Drop the field from the array.
-        var fieldLocation = this.fields.indexOf(field);
-        this.fields.splice(fieldLocation, 1);
-      }
+      });
+      this.parseData();
+      $('#add_new_field').click(this.addEmptyField);
+      this.addEmptyField;
     },
-    addFieldOption: function addFieldOption(field_id) {
-      var blankFieldOption = {
-        id: Math.random().toString(36),
-        name: '',
-        text: '',
-        field_id: field_id,
-        notSaved: true
-      };
-      var field = _.findWhere(addFields.fields, { id: field_id });
-      field.fieldOptions = field.fieldOptions.concat(blankFieldOption);
-    },
-    deleteFieldOption: function deleteFieldOption(field_id, option_id) {
-      if (confirm('Are you sure you would like to delete this field?')) {
-        var field = _.findWhere(this.fields, { id: field_id });
-        var fieldOption = _.findWhere(field.fieldOptions, { id: option_id });
-        var fieldOptionClass = '.field-option-' + fieldOption.id;
-        var fieldOptionURL = '/fieldOptions/' + fieldOption.id;
+    methods: {
+      parseData: function parseData() {
+        this.form = JSON.parse($('#form-json').first().text());
+        this.fields = JSON.parse($('#fields-json').first().text());
+      },
+      addEmptyField: function addEmptyField() {
+        var blankField = {
+          id: Math.random().toString(36),
+          name: '',
+          description: '',
+          type: 'text',
+          fieldOptions: [],
+          rules: [],
+          notSaved: true
+        };
+        addFields.fields = addFields.fields.concat(blankField);
+      },
+      deleteField: function deleteField(field_id) {
+        if (confirm('Are you sure you would like to delete this field?')) {
+          var field = _.findWhere(this.fields, { id: field_id });
+          var fieldClass = '.field-' + field.id;
+          var fieldURL = '/fields/' + field.id;
 
-        // Check for the "notSaved key"
-        if (typeof fieldOption.notSaved === 'undefined') {
-          $.ajax({
-            url: fieldOptionURL,
-            type: 'DELETE',
-            success: function success(result) {
-              $(fieldOptionClass).fadeOut();
-            }
-          });
+          // Check for the "notSaved key"
+          if (typeof field.notSaved === 'undefined') {
+            $.ajax({
+              url: fieldURL,
+              type: 'DELETE',
+              success: function success(result) {
+                $(fieldClass).fadeOut();
+              }
+            });
+          }
+
+          // Drop the field from the array.
+          var fieldLocation = this.fields.indexOf(field);
+          this.fields.splice(fieldLocation, 1);
         }
+      },
+      addFieldOption: function addFieldOption(field_id) {
+        var blankFieldOption = {
+          id: Math.random().toString(36),
+          name: '',
+          text: '',
+          field_id: field_id,
+          notSaved: true
+        };
+        var field = _.findWhere(addFields.fields, { id: field_id });
+        field.fieldOptions = field.fieldOptions.concat(blankFieldOption);
+      },
+      deleteFieldOption: function deleteFieldOption(field_id, option_id) {
+        if (confirm('Are you sure you would like to delete this field?')) {
+          var field = _.findWhere(this.fields, { id: field_id });
+          var fieldOption = _.findWhere(field.fieldOptions, { id: option_id });
+          var fieldOptionClass = '.field-option-' + fieldOption.id;
+          var fieldOptionURL = '/fieldOptions/' + fieldOption.id;
 
-        // Drop the field from the array.
-        var fieldOptionLocation = field.fieldOptions.indexOf(fieldOption);
-        console.log(field.fieldOptions);
-        field.fieldOptions.splice(fieldOptionLocation, 1);
-      }
-    },
-    // Check if a Field is elligible to have options
-    fieldHasOptions: function fieldHasOptions(field_id) {
-      var field = _.findWhere(this.fields, { id: field_id });
-      var fieldsWithOptions = this.form.field_types_with_options;
-      if ($.inArray(field.type, fieldsWithOptions) > -1) {
-        return true;
-      }
-      return false;
-    },
+          // Check for the "notSaved key"
+          if (typeof fieldOption.notSaved === 'undefined') {
+            $.ajax({
+              url: fieldOptionURL,
+              type: 'DELETE',
+              success: function success(result) {
+                $(fieldOptionClass).fadeOut();
+              }
+            });
+          }
 
-    capitalizeString: function capitalizeString(string) {
-      var str = s(string).capitalize().value();
-      return str;
+          // Drop the field from the array.
+          var fieldOptionLocation = field.fieldOptions.indexOf(fieldOption);
+          console.log(field.fieldOptions);
+          field.fieldOptions.splice(fieldOptionLocation, 1);
+        }
+      },
+      // Check if a Field is elligible to have options
+      fieldHasOptions: function fieldHasOptions(field_id) {
+        var field = _.findWhere(this.fields, { id: field_id });
+        var fieldsWithOptions = this.form.field_types_with_options;
+        if ($.inArray(field.type, fieldsWithOptions) > -1) {
+          return true;
+        }
+        return false;
+      },
+
+      capitalizeString: function capitalizeString(string) {
+        var str = s(string).capitalize().value();
+        return str;
+      }
     }
-  }
-});
+  });
+}
 
 },{"underscore.string":25}],71:[function(require,module,exports){
 'use strict';
 
-var addReportFields = new Vue({
-    el: '#add-report-fields',
-    data: {
-        forms: [],
-        reportFields: []
-    },
-    created: function created() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        this.parseData();
-        console.log(this.reportFields);
-        $('#add_new_field').click(this.addReportField);
-    },
-    methods: {
-        parseData: function parseData() {
-            this.forms = JSON.parse($('#report-fields-json').first().text());
+if ($('#add-report-fields').length > 0) {
+    var addReportFields = new Vue({
+        el: '#add-report-fields',
+        data: {
+            forms: [],
+            reportFields: []
         },
-        addReportField: function addReportField() {
-            var blankField = {
-                id: Math.random().toString(36),
-                fieldId: 0,
-                rule: null,
-                notSaved: true
-            };
-            addReportFields.reportFields = addReportFields.reportFields.concat(blankField);
+        created: function created() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            this.parseData();
+            console.log(this.reportFields);
+            $('#add_new_field').click(this.addReportField);
+        },
+        methods: {
+            parseData: function parseData() {
+                this.forms = JSON.parse($('#report-fields-json').first().text());
+            },
+            addReportField: function addReportField() {
+                var blankField = {
+                    id: Math.random().toString(36),
+                    fieldId: 0,
+                    rule: null,
+                    notSaved: true
+                };
+                addReportFields.reportFields = addReportFields.reportFields.concat(blankField);
+            }
         }
-    }
-});
+    });
+}
 
 },{}],72:[function(require,module,exports){
 "use strict";
@@ -1344,40 +1349,43 @@ var adminVue = new Vue({
 },{"./addFields":70,"./addReportFields":71,"./showForms":73,"underscore.string":25}],73:[function(require,module,exports){
 'use strict';
 
-var showForms = new Vue({
-    el: '#show-forms-index',
-    data: {
-        forms: []
-    },
-    created: function created() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        this.parseData();
-    },
-    methods: {
-        parseData: function parseData() {
-            this.forms = JSON.parse($('#forms-json').first().text());
+if ($('#show-forms-index').length > 0) {
+
+    var showForms = new Vue({
+        el: '#show-forms-index',
+        data: {
+            forms: []
         },
-        deleteForm: function deleteForm(form_id) {
-            if (confirm('Are you sure you would like to delete this form?')) {
-                var form = _.findWhere(this.forms, { id: form_id });
-                var formClass = '.form-' + form.id;
-                var formURL = '/forms/' + form.id;
-                console.log(formURL);
-                $.ajax({
-                    url: formURL,
-                    type: 'DELETE',
-                    success: function success(result) {
-                        $(formClass).fadeOut();
-                    }
-                });
+        created: function created() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            this.parseData();
+        },
+        methods: {
+            parseData: function parseData() {
+                this.forms = JSON.parse($('#forms-json').first().text());
+            },
+            deleteForm: function deleteForm(form_id) {
+                if (confirm('Are you sure you would like to delete this form?')) {
+                    var form = _.findWhere(this.forms, { id: form_id });
+                    var formClass = '.form-' + form.id;
+                    var formURL = '/forms/' + form.id;
+                    console.log(formURL);
+                    $.ajax({
+                        url: formURL,
+                        type: 'DELETE',
+                        success: function success(result) {
+                            $(formClass).fadeOut();
+                        }
+                    });
+                }
             }
         }
-    }
-});
+    });
+}
 
 },{}]},{},[72]);
 

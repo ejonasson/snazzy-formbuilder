@@ -1,5 +1,9 @@
 @extends('templates.admin')
 
+@section('title')
+    Snazzy Forms
+@stop
+
 @section('content')
 
 <h1>A Snazzy Form Builder App</h1>

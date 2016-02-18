@@ -8391,7 +8391,13 @@ body {
 }
 
 .public-body {
+  background-color: #f2f2f2;
+  height: 100%;
+}
+
+.form-content {
   background-color: #fff;
+  margin-top: 20px;
 }
 
 .btn-submit {

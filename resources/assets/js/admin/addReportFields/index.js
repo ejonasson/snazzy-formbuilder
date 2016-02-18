@@ -1,3 +1,4 @@
+if ($('#add-report-fields').length > 0) {
 var addReportFields = new Vue ({
     el: '#add-report-fields',
     data: {
@@ -30,3 +31,4 @@ var addReportFields = new Vue ({
     }
 });
 
+}

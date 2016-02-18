@@ -4,6 +4,10 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
 @stop
 
+@section('title')
+    My forms
+@stop
+
 @section('content')
     <div class="form-index" id="show-forms-index">
         <h1 class="page-title">My Forms</h1>

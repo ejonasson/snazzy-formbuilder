@@ -1,5 +1,10 @@
 @extends('templates.public')
 
+@section('title')
+    {{$form->name}}
+@stop
+
+
 @section('content')
     <form method="POST" action="/forms/{{$form->id}}/submit" id="custom-form">
         {!! csrf_field() !!}    

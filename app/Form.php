@@ -56,9 +56,7 @@ class Form extends Model
             $field = $this->fields->find($form_field['id']);
 
             $form_field['hasOptions'] = $field->hasOptions();
-            if ($field->hasOptions()) {
-                $form_field['fieldOptions'] = $field->fieldOptions->toArray();
-            }
+            $form_field['fieldOptions'] = $form_field['hasOptions'] ? $field->fieldOptions->toArray() : array();
             
             $form_field['rules'] = json_decode($form_field['rules']);
             
