@@ -16,5 +16,6 @@ elixir(function(mix) {
 });
 
 elixir(function(mix) {
-    mix.browserify('main.js');
+    mix.browserify('admin/admin.js');
+    mix.browserify('public/public.js');
 });

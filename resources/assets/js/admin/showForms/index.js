@@ -1,6 +1,4 @@
 
-if ($('#show-forms-index').length > 0) {
-
     var showForms = new Vue ({
         el: '#show-forms-index',
         data: {
@@ -35,5 +33,3 @@ if ($('#show-forms-index').length > 0) {
             }
         }
     });
-
-}

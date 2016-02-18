@@ -13,7 +13,7 @@
     </header>
     
     
-    <div class="body-background">
+    <div class="body-background public">
         <div class="container body-container">
             <div class="col-sm-12" id="formBuilderApp">
                 @yield('content')
@@ -24,7 +24,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset('js/vue.js') }}"></script>
-    <script  src="{{ URL::asset('js/main.js') }}"></script>
+    <script  src="{{ URL::asset('js/public.js') }}"></script>
     @yield('footer')
 
 </body>

@@ -1,45 +1,43 @@
 var s = require("underscore.string");
 
-if ($('#add-fields').length > 0) {
-
-  var addFields = new Vue({
-    el: '#add-fields',
-    data: {
-      form: [],
-      fields: []
+var addFields = new Vue({
+  el: '#add-fields',
+  data: {
+    form: [],
+    fields: []
+  },
+  created: function() {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    this.parseData();
+    $('#add_new_field').click(this.addEmptyField);
+    this.addEmptyField;
+  },
+  methods: {
+    parseData: function() {
+      this.form = JSON.parse($('#form-json').first().text());  
+      this.fields = JSON.parse($('#fields-json').first().text());  
     },
-    created: function() {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      this.parseData();
-      $('#add_new_field').click(this.addEmptyField);
-      this.addEmptyField;
+    addEmptyField: function(){
+      var blankField = {
+        id: Math.random().toString(36),
+        name : '',
+        description : '',
+        type: 'text',
+        fieldOptions: [],
+        rules: [],
+        notSaved: true
+      };
+      addFields.fields = addFields.fields.concat(blankField);
     },
-    methods: {
-      parseData: function() {
-        this.form = JSON.parse($('#form-json').first().text());  
-        this.fields = JSON.parse($('#fields-json').first().text());  
-      },
-      addEmptyField: function(){
-        var blankField = {
-          id: Math.random().toString(36),
-          name : '',
-          description : '',
-          type: 'text',
-          fieldOptions: [],
-          rules: [],
-          notSaved: true
-        };
-        addFields.fields = addFields.fields.concat(blankField);
-      },
-      deleteField: function(field_id) {
-        if (confirm('Are you sure you would like to delete this field?')) {
-          var field = _.findWhere(this.fields, {id: field_id});
-          var fieldClass = '.field-' + field.id;
-          var fieldURL = '/fields/' + field.id;
+    deleteField: function(field_id) {
+      if (confirm('Are you sure you would like to delete this field?')) {
+        var field = _.findWhere(this.fields, {id: field_id});
+        var fieldClass = '.field-' + field.id;
+        var fieldURL = '/fields/' + field.id;
 
 
         // Check for the "notSaved key"
@@ -111,7 +109,3 @@ if ($('#add-fields').length > 0) {
     }
   }
 });
-
-
-}
-

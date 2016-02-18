@@ -1,4 +1,5 @@
 "use strict";
+
 Vue.config.debug = true;
 var s = require("underscore.string");
 

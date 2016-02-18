@@ -1328,6 +1328,7 @@ var addReportFields = new Vue({
 
 },{}],72:[function(require,module,exports){
 "use strict";
+
 Vue.config.debug = true;
 var s = require("underscore.string");
 
@@ -1380,4 +1381,4 @@ var showForms = new Vue({
 
 },{}]},{},[72]);
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=admin.js.map
