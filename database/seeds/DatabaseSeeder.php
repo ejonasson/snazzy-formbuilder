@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeedForm::class);
         $this->call(SeedField::class);
         $this->call(FieldOptionSeeder::class);
+        $this->call(SeedReportsTable::class);
         Model::reguard();
     }
 }

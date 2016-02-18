@@ -36,3 +36,6 @@ Route::get('form/{id}/submissions', 'Submit\SubmitController@getFormSubmissions'
 
 // Form Submission Routes
 Route::post('forms/{id}/submit', 'Submit\SubmitController@store');
+
+// Reports Routes
+Route::resource('reports', 'Report\ReportController');

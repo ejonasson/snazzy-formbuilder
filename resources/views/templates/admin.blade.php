@@ -8,7 +8,7 @@
     @yield('head')
 </head>
 <body>
-    <div class="admin-body">
+    <div class="admin-body" id="admin">
          
         <header class="site-header admin-header">
             @yield('header')

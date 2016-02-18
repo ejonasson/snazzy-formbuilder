@@ -8344,6 +8344,8 @@ body {
 }
 
 .form-index .form-description {
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 10px;
 }
 

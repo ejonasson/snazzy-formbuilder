@@ -17,6 +17,11 @@ use \stdClass;
 
 class SubmitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -68,6 +73,7 @@ class SubmitController extends Controller
     {
         $submission = Submission::findOrFail($id);
         $data = $submission->getSubmissionData();
+
         return view('submissions.show', ['response' => $data]);
     }
 
@@ -119,6 +125,11 @@ class SubmitController extends Controller
             $data = $submission->getSubmissionData();
             $submissions_array[] = $data;
         }
+        /*
+        $field  = \App\Field::findOrFail(2);
+        $submission_response = $field->getResponses();
+        dd($submission_response);
+        */
         return view('submissions.single-form', ['submissions' => $submissions_array]);
     }
 

@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Field;
 use App\FieldOption;
+use App\Submission;
 use App\FormBuilder\FieldView;
 use App\FormBuilder\Rules\FieldRules;
 use App\FormBuilder\FieldTypes;
@@ -88,5 +88,19 @@ class Field extends Model
     {
         $view = $this->typeData()->getTypeView($this);
         return $view->render();
+    }
+
+    /**
+     * Get all Responses that exist for this field
+     * @return array Responses
+     */
+    public function getResponses()
+    {
+        $responses = [];
+        $form_submissions = $this->form->submissions->all();
+        foreach ($form_submissions as $form_submission) {
+            $responses[] = $form_submission->getFieldSubmissionResponse($this);
+        }
+        return $responses;
     }
 }

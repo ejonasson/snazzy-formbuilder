@@ -16,6 +16,7 @@ if ($('#add-fields').length > 0) {
       });
       this.parseData();
       $('#add_new_field').click(this.addEmptyField);
+      this.addEmptyField;
     },
     methods: {
       parseData: function() {

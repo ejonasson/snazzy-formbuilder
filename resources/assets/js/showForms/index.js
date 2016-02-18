@@ -1,4 +1,3 @@
-var s = require("underscore.string");
 
 if ($('#show-forms-index').length > 0) {
 

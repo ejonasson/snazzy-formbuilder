@@ -16,6 +16,7 @@
       <ul class="nav navbar-nav">
         <li><a href="/forms">Forms</a></li>
         <li><a href="/submissions">Submissions</a></li>
+        <li><a href="/reports">Reports</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())

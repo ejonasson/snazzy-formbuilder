@@ -1,6 +1,12 @@
 @extends('templates.admin')
 
+@section('title')
+    Create new form
+@stop
+
 @section('content')
+
+<h1>Create new form</h1>
 
 <form method="POST" action="/forms">
     {!! csrf_field() !!}

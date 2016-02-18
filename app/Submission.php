@@ -14,6 +14,20 @@ class Submission extends Model
         return $submission_data;
 
     }
+
+    public function getFieldSubmissionResponse(\App\Field $field)
+    {
+        $submission_data = $this->getSubmissionData();
+        foreach ($submission_data as $key => $field_submission) {
+            if (!is_object($field_submission)) {
+                continue;
+            }
+            if ($field_submission->id == $field->id) {
+                return $field_submission->value;
+            }
+        }
+    }
+
     public function form()
     {
         return $this->belongsTo('App\Form');
