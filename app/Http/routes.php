@@ -39,3 +39,4 @@ Route::post('forms/{id}/submit', 'Submit\SubmitController@store');
 
 // Reports Routes
 Route::resource('reports', 'Report\ReportController');
+Route::get('reports/form/{id}/overview', 'Report\ReportController@getOverview');

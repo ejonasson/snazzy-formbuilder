@@ -1,3 +1,7 @@
+var $ = require("jquery");
+var _ = require("underscore");
+var s = require("underscore.string");
+
 if ($('#add-report-fields').length > 0) {
 var addReportFields = new Vue ({
     el: '#add-report-fields',

@@ -90,6 +90,15 @@ class Field extends Model
         return $view->render();
     }
 
+    public function getOptionByValue($field_value)
+    {
+        foreach ($this->fieldOptions as $fieldOption) {
+            if ($fieldOption->name == $field_value) {
+                return $fieldOption;
+            }
+        }
+    }
+
     /**
      * Get all Responses that exist for this field
      * @return array Responses

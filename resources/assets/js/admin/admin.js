@@ -1,7 +1,7 @@
 "use strict";
 
 Vue.config.debug = true;
-var s = require("underscore.string");
+
 
 var adminVue = new Vue({
     el: '#admin',

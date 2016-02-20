@@ -21,9 +21,6 @@
             </div>
         </div>
 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="{{ URL::asset('js/vue.js') }}"></script>
         <script  src="{{ URL::asset('js/admin.js') }}"></script>
         @yield('footer')

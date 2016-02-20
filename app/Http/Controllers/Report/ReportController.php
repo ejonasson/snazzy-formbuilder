@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Report;
 use App\Form;
 
+use App\FormBuilder\Reports\DefaultReports\SummaryData;
+use App\FormBuilder\Reports\ReportData;
+
 use Auth;
 
 class ReportController extends Controller
@@ -62,7 +65,7 @@ class ReportController extends Controller
     {
         $report = Report::findOrFail($id);
         $data = $report->getReportData();
-        dd($data);
+
         return view('reports.show', ['data' => $data]);
     }
 
@@ -98,5 +101,14 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getOverview($form_id)
+    {
+        $report = SummaryData::getReport($form_id);
+        $data = $report->getReportData();
+        
+        return view('reports.show', ['data' => $data]);
+
     }
 }

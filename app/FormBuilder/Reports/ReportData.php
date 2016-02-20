@@ -16,13 +16,13 @@ class ReportData
     {
         $this->report = $report;
         $this->reportFields = $report->getReportFields();
-        $this->processReportFields(); 
-
+        $this->processReportFields();
     }
 
     public function processReportFields()
     {
         foreach ($this->reportFields as $report_field) {
+             $report_field->field = Field::find($report_field->fieldId);
              $report_field->data = $this->processReportField($report_field);
         }
         return $this->reportFields;
@@ -47,7 +47,7 @@ class ReportData
                 break;
             
             default:
-                # code...
+                return new ReportField\TextFieldProcessor($field, $rule);
                 break;
         }
     }

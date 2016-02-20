@@ -23,7 +23,7 @@ class Submission extends Model
                 continue;
             }
             if ($field_submission->id == $field->id) {
-                return $field_submission->value;
+                return $field_submission;
             }
         }
     }

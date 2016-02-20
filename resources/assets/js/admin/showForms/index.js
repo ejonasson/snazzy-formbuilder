@@ -1,3 +1,8 @@
+var $ = require("jquery");
+var _ = require("underscore");
+var s = require("underscore.string");
+
+
 if ($('#show-forms-index').length > 0) {
 
     var showForms = new Vue ({

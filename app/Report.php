@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\FormBuilder\Reports\ReportData;
 
-
 class Report extends Model
 {
     public $data;

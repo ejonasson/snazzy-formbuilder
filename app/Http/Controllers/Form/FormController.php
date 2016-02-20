@@ -58,7 +58,7 @@ class FormController extends Controller
         $new_form = $this->buildForm($form, $request);
         $new_form->save();
 
-        return redirect('forms');
+        return redirect("forms/{$new_form->id}/edit");
     }
 
     /**
@@ -82,7 +82,6 @@ class FormController extends Controller
     public function edit($id)
     {
         $form = Form::findOrFail($id);
-        $this->authorize('edit', $form);
         $form->valid_fields = $this->getFieldTypes();
         $form->field_types_with_options = $this->getTypesWithOptions();
         $form->json_form = $form->toJson();
@@ -102,7 +101,6 @@ class FormController extends Controller
     {
 
         $form = Form::findOrFail($id);
-        $this->authorize('edit', $form);
         $update_form = $this->buildForm($form, $request);
         $update_form->update();
         $fields = $form->updateFormFields($request);

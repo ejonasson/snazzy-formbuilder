@@ -125,11 +125,7 @@ class SubmitController extends Controller
             $data = $submission->getSubmissionData();
             $submissions_array[] = $data;
         }
-        /*
-        $field  = \App\Field::findOrFail(2);
-        $submission_response = $field->getResponses();
-        dd($submission_response);
-        */
+
         return view('submissions.single-form', ['submissions' => $submissions_array]);
     }
 
@@ -145,6 +141,11 @@ class SubmitController extends Controller
             $single_submission->name = $field->name;
             $single_submission->type = $field->type;
             $single_submission->value = $field_value;
+            if ($field->hasOptions()) {
+                $fieldOption = $field->getOptionByValue($field_value);
+                $single_submission->optionId = $fieldOption->id;
+                $single_submission->optionText = $fieldOption->text;
+            }
 
             $submission_data[] = $single_submission;
         }

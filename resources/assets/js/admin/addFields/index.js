@@ -1,4 +1,7 @@
+var $ = require("jquery");
+var _ = require("underscore");
 var s = require("underscore.string");
+
 
 if ($('#add-fields').length > 0) {
 
