@@ -141,11 +141,6 @@ class SubmitController extends Controller
             $single_submission->name = $field->name;
             $single_submission->type = $field->type;
             $single_submission->value = $field_value;
-            if ($field->hasOptions()) {
-                $fieldOption = $field->getOptionByValue($field_value);
-                $single_submission->optionId = $fieldOption->id;
-                $single_submission->optionText = $fieldOption->text;
-            }
 
             $submission_data[] = $single_submission;
         }

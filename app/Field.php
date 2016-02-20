@@ -112,4 +112,38 @@ class Field extends Model
         }
         return $responses;
     }
+    /**
+     * Get responses that exist for fieldOption fields
+     * We need a special function since there can be
+     * multiple responses per field
+     */
+    public function getFieldOptionResponses()
+    {
+        $unique_responses = [];
+        $responses = $this->getResponses();
+
+        foreach ($responses as $response) {
+            if (is_array($response->value)) {
+                foreach ($response->value as $value) {
+                    $unique_responses[] = $this->getSingleFieldOptionResponse($response, $value);
+                }
+            } else {
+                $unique_responses[] = $this->getSingleFieldOptionResponse($response, $response->value);
+            }
+
+        }
+        return $unique_responses;
+    }
+
+    public function getSingleFieldOptionResponse($response, $value)
+    {
+        $fieldOption = $this->getOptionByValue($value);
+        $single_response = new \stdClass;
+        $single_response->id = $response->id;
+        $single_response->name = $response->name;
+        $single_response->type = $response->type;
+        $single_response->text = $fieldOption->text;
+        $single_response->value = $value;
+        return $single_response;
+    }
 }

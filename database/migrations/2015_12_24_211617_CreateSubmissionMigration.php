@@ -14,7 +14,7 @@ class CreateSubmissionMigration extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('submission');
+            $table->text('submission');
             $table->integer('form_id')->unsigned()->index();
             $table->foreign('form_id')->references('id')->on('forms');
             $table->timestamps();

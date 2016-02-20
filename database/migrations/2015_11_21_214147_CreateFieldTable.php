@@ -15,9 +15,9 @@ class CreateFieldTable extends Migration
         Schema::create('fields', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('type');
-            $table->string('rules');
+            $table->text('rules');
             $table->integer('form_id')->unsigned()->index();
             $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
             $table->timestamps();

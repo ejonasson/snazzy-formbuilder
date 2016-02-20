@@ -15,10 +15,11 @@ trait CalculateFrequency
                 continue;
             }
             if (isset($frequencies[$response->value])) {
-                $frequencies[$response->value]['count']++;
+                $frequencies[$response->value]['value']++;
             } else {
-                $frequencies[$response->value]['count'] = 1;
-                $frequencies[$response->value]['name'] = isset($response->optionText) ? $response->optionText : $response->value;
+                $frequencies[$response->value]['value'] = 1;
+                $frequencies[$response->value]['name'] = isset($response->text)
+                ? $response->text : $response->value;
             }
         }
         ksort($frequencies);

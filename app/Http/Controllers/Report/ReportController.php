@@ -17,6 +17,10 @@ use Auth;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['index', 'create', 'store', 'edit', 'update', 'delete']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +28,10 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('reports.index');
+        $user = Auth::user();
+        $forms = $user->forms->all();
+
+        return view('reports.index', ['forms' => $forms]);
     }
 
     /**

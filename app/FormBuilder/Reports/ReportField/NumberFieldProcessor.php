@@ -9,6 +9,8 @@ class NumberFieldProcessor implements ReportFieldProcessing
     public $field;
     public $rule;
     
+    use CalculateFrequency;
+
     public function __construct(Field $field, $rule)
     {
         $this->field = $field;
@@ -19,12 +21,28 @@ class NumberFieldProcessor implements ReportFieldProcessing
         $responses = $this->field->getResponses();
         switch ($this->rule) {
             case 'numMean':
-                return array_sum($responses) / count($responses);
+                return $this->calculateMean($responses);
                 break;
             
             default:
-                # code...
+                return $this->calculateFrequency($responses);
                 break;
         }
+    }
+
+    public function calculateMean($responses)
+    {
+        
+        $values = [];
+        foreach ($responses as $response) {
+            $values[] = $response->value;
+        }
+        $mean = array_sum($values) / count($values);
+        $field = [
+                'name' => $this->field->name,
+                'value' => $mean
+                    ];
+        $response_fields = [$field];
+        return $response_fields;
     }
 }

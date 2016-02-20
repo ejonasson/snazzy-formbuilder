@@ -45,7 +45,15 @@ class ReportData
             case 'number':
                 return new ReportField\NumberFieldProcessor($field, $rule);
                 break;
-            
+            case 'checkbox':
+                return new ReportField\CheckboxFieldProcessor($field, $rule);
+                break;
+            case 'select':
+                return new ReportField\SelectFieldProcessor($field, $rule);
+                break;
+            case 'radio':
+                return new ReportField\RadioFieldProcessor($field, $rule);
+                break;
             default:
                 return new ReportField\TextFieldProcessor($field, $rule);
                 break;

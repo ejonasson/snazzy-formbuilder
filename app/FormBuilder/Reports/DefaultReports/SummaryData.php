@@ -16,6 +16,7 @@ class SummaryData
 
         $form = Form::findOrFail($form_id);
         $reportFields = [];
+        $reportFields['reportFields'] = [];
         $reportFields['form'] = $form_id;
         foreach ($form->fields as $field) {
             $reportFields['reportFields'][$field->id]['fieldId'] = $field->id;
