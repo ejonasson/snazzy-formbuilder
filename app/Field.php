@@ -123,6 +123,10 @@ class Field extends Model
         $responses = $this->getResponses();
 
         foreach ($responses as $response) {
+            if ($response === null) {
+                continue;
+            }
+
             if (is_array($response->value)) {
                 foreach ($response->value as $value) {
                     $unique_responses[] = $this->getSingleFieldOptionResponse($response, $value);
