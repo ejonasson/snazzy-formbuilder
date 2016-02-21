@@ -11,6 +11,9 @@
 @section('content')
     <div class="form-index" id="show-forms-index">
         <h1 class="page-title">My Forms</h1>
+        <p>
+            The forms you have created are listed below. Click "Add New" to generate a new form.
+        </p>
         @foreach($forms as $form)
             <div class="single-form-entry form-{{$form->id}}">
                 <div class="form-title">

@@ -93,7 +93,6 @@ var addFields = new Vue({
 
          // Drop the field from the array.
          var fieldOptionLocation = field.fieldOptions.indexOf(fieldOption);
-         console.log(field.fieldOptions);
          field.fieldOptions.splice(fieldOptionLocation, 1);       
 
        } 

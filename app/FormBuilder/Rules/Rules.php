@@ -30,22 +30,25 @@ abstract class Rules
 
     /**
      * Checks to see if a rule exists by name
-     * Adds a true rule if it does, adds a false rule if it does not
-     * Note: value is not checked, only existence
+     * Adds a true rule if it does
      * @param  string $rule_name
      * @return $this
      */
     protected function processBoolean($rule_name)
     {
-        $rule = array(
-            $rule_name => false
-            );
-
         if (array_key_exists($rule_name, $this->rules)) {
-            $rule[$rule_name] = true;
+            $rule[] = $rule_name;
+            $this->add($rule);
         }
-        $this->add($rule);
         return $this;
+    }
+
+    protected function getBoolean($rule_name)
+    {
+        if (in_array($rule_name, $this->rules)) {
+            return true;
+        }
+        return false;
     }
 
     /**

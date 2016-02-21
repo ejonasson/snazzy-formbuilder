@@ -150,9 +150,4 @@ class FormController extends Controller
         $field = new Field;
         return $field->getTypesWithOptions();
     }
-
-    protected function authCheck()
-    {
-
-    }
 }

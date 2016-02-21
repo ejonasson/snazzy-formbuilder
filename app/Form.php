@@ -6,11 +6,12 @@ use Auth;
 use App\User;
 use App\Field;
 use App\FieldOption;
+use Illuminate\Http\Request;
 use App\Http\Requests\FormRequest;
 use App\FormBuilder\Rules\FieldRules;
 use Gate;
+use Validator;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use App\FormBuilder\Rules\FormRules;
 
 class Form extends Model
@@ -57,8 +58,10 @@ class Form extends Model
 
             $form_field['hasOptions'] = $field->hasOptions();
             $form_field['fieldOptions'] = $form_field['hasOptions'] ? $field->fieldOptions->toArray() : array();
-            
-            $form_field['rules'] = json_decode($form_field['rules']);
+
+            $rules = explode('|', $form_field['rules']);
+            $rules = new FieldRules($rules);
+            $form_field['rules'] = $rules->toArray();
             
             $prepared_fields[] = $form_field;
         }
@@ -80,7 +83,7 @@ class Form extends Model
             // Generate a blank Rules Array if needed
             $rules_array = !empty($request_value['rules']) ? $request_value['rules'] : array();
             $rules = new FieldRules($rules_array);
-            $field->rules = json_encode($rules->normalize());
+            $field->rules = implode('|', $rules->normalize());
             
             $field->save();
 
@@ -104,5 +107,37 @@ class Form extends Model
             $option->field_id = $field->id;
             $option->save();
         }
+    }
+
+    /**
+     * Dynamically generate our validator based on rules in each field
+     * @param  [type] $request [description]
+     * @return [type]          [description]
+     */
+    public function validateInputs($request)
+    {
+        $inputs = $request->all();
+        // We don't need the CSRF token, so drop it
+        unset($inputs['_token']);
+        $validator_rules = [];
+        foreach ($inputs as $key => $input) {
+            $field = Field::find($key);
+            if (!$field) {
+                continue;
+            }
+            $rules = $field->getRules();
+            $fieldRules = [];
+            foreach ($rules as $rule => $enabled) {
+                if ($enabled) {
+                    $fieldRules[] = $rule;
+                }
+            }
+            if (!empty($fieldRules)) {
+                $fieldRules = implode('|', $fieldRules);
+                $validator_rules[$field->id] = $fieldRules;
+            }
+        }
+        $validator = Validator::make($request->all(), $validator_rules);
+        return $validator;
     }
 }

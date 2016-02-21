@@ -56,7 +56,7 @@ class Field extends Model
     public function getRules()
     {
         $rules = new FieldRules($this->rules);
-        return $rules->getRules();
+        return json_decode($rules->getRules());
     }
 
 

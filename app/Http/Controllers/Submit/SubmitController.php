@@ -53,14 +53,21 @@ class SubmitController extends Controller
     {
         $submission = new Submission;
         $form = Form::findorfail($id);
-        $inputs = $request->all();
-        $submission->submission = $this->prepareSubmission($inputs, $form);
-        $submission->form_id = $id;
-        $submission->save();
 
-        Event::fire(new FormWasSubmitted($form, $submission));
 
-        return view('submissions.confirmation', ['form' => $form, 'submission' => $submission]);
+        if ($form->validateInputs($request)) {
+            $inputs = $request->all();
+            // We don't need the CSRF token, so drop it
+            unset($inputs['_token']);            
+            $submission->submission = $this->prepareSubmission($inputs, $form);
+            $submission->form_id = $id;
+            $submission->save();
+            Event::fire(new FormWasSubmitted($form, $submission));
+            return view('submissions.confirmation', ['form' => $form, 'submission' => $submission]);
+        } else {
+            dd('validation failed');
+        }
+
     }
 
     /**
@@ -131,8 +138,6 @@ class SubmitController extends Controller
 
     protected function prepareSubmission($inputs, Form $form)
     {
-        // We don't need the CSRF token, so drop it
-        unset($inputs['_token']);
         $submission_data = [];
         foreach ($inputs as $field_id => $field_value) {
             $field = $form->fields->find($field_id);

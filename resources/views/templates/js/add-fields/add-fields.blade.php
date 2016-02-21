@@ -1,4 +1,5 @@
 <div class="fields-js" id="add-fields">
+    
     <template v-for="field in fields">
         <div class="field-data well well-sm field-@{{field.id}}">
             <span class="delete-field"><a v-on:click="deleteField(field.id)">X</a></span>
