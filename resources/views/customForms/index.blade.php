@@ -16,6 +16,11 @@
                 <div class="form-title">
                     <h2>{{$form->name}}</a></h2>
                 </div>
+                <div class="form-permalink">
+                    <h5> URL: 
+                    <input type="text" class="form-control permalink-preview" value="{{url('/forms/' . $form->id)}}" disabled>
+                    </h5>
+                </div>
                 <div class="form-description">
                     {{$form->description}}
                 </div>

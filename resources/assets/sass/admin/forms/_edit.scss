@@ -2,6 +2,19 @@
 
         .add-new {
             cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        ul.field-rules {
+            padding-left: 0;
+        }
+
+        .field-rule {
+            list-style-type: none;
+
+            label {
+                cursor: pointer;
+            }
         }
 
         .field-options-wrapper{
@@ -13,6 +26,7 @@
             .field-options {
                 width: 95%;
             }
+
             .delete-field {
                 margin-top: 8px;
             }            
@@ -24,7 +38,7 @@
         }
 
         label.field-label {
-            margin-top: 3px;
+            margin-top: 5px;
         }
 
 }

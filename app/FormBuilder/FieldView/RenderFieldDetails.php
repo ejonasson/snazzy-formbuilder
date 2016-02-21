@@ -6,7 +6,9 @@ trait renderFieldDetails
 {
     public function renderTitle()
     {
-        return '<h2>' . $this->field->name . '</h2>';
+        $output = '<h2 class="field-name">' . $this->field->name . '</h2>';
+        $output .= '<p class="field-description">' . $this->field->description . '</p>';
+        return $output;
     }
 
     protected function getClasses()

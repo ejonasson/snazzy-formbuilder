@@ -11,7 +11,7 @@
 
 <h5>
     <a
-    class="add-new add-new-field-option" 
+    class="btn btn-default add-new" 
     v-on:click="addFieldOption(field.id)">
         Add New
     </a>

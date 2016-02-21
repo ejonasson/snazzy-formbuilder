@@ -11,11 +11,8 @@
 |
 */
 
-// @todo: Set up Middleware on routes instead of in Controllers
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', 'PageController@index');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -41,5 +38,19 @@ Route::post('forms/{id}/submit', 'Submit\SubmitController@store');
 
 // Reports Routes
 Route::resource('reports', 'Report\ReportController');
-Route::get('reports/form/{id}/overview', 'Report\ReportController@getOverview');
-Route::get('reports/form/{id}', 'Report\ReportController@getFormReports');
+
+Route::get(
+    'reports/form/{id}/overview',
+    [
+        'middleware' => 'auth',
+        'uses' => 'Report\ReportController@getOverview'
+    ]
+);
+
+Route::get(
+    'reports/form/{id}',
+    [
+        'middleware' => 'auth',
+        'uses' => 'Report\ReportController@getFormReports'
+    ]
+);

@@ -23,7 +23,7 @@
         </div>
     </template>
 
-    <h5><a class="add-new add-new-field" id="add_new_field">Add New</a></h5>
+    <a class="btn btn-default add-new" id="add_new_field">Add New</a>
 
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Update</button>

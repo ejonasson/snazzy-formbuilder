@@ -1,7 +1,7 @@
 "use strict";
 
 Vue.config.debug = true;
-
+require('jquery');
 
 var adminVue = new Vue({
     el: '#admin',
@@ -9,5 +9,9 @@ var adminVue = new Vue({
         addFields: require('./addFields'),
         showForms: require('./showForms'),
         addReportFields: require('./addReportFields')
+    },
+    created: function() {
+    },
+    methods: {
     }
 });

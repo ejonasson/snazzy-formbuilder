@@ -12724,6 +12724,7 @@ if ($('#add-report-fields').length > 0) {
 "use strict";
 
 Vue.config.debug = true;
+require('jquery');
 
 var adminVue = new Vue({
     el: '#admin',
@@ -12731,10 +12732,12 @@ var adminVue = new Vue({
         addFields: require('./addFields'),
         showForms: require('./showForms'),
         addReportFields: require('./addReportFields')
-    }
+    },
+    created: function created() {},
+    methods: {}
 });
 
-},{"./addFields":72,"./addReportFields":73,"./showForms":75}],75:[function(require,module,exports){
+},{"./addFields":72,"./addReportFields":73,"./showForms":75,"jquery":1}],75:[function(require,module,exports){
 "use strict";
 
 var $ = require("jquery");

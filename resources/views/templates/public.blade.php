@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     @yield('head')
 </head>
