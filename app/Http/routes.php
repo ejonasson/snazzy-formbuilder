@@ -11,6 +11,8 @@
 |
 */
 
+// @todo: Set up Middleware on routes instead of in Controllers
+
 Route::get('/', function () {
     return view('pages.home');
 });
@@ -40,3 +42,4 @@ Route::post('forms/{id}/submit', 'Submit\SubmitController@store');
 // Reports Routes
 Route::resource('reports', 'Report\ReportController');
 Route::get('reports/form/{id}/overview', 'Report\ReportController@getOverview');
+Route::get('reports/form/{id}', 'Report\ReportController@getFormReports');

@@ -39,7 +39,7 @@ class NumberFieldProcessor implements ReportFieldProcessing
         }
         $mean = array_sum($values) / count($values);
         $field = [
-                'name' => $this->field->name,
+                'name' => 'Average',
                 'value' => $mean
                     ];
         $response_fields = [$field];

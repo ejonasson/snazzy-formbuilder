@@ -2,27 +2,34 @@
 
 
 @section('title')
-    Report
+    {{$report->title}}
 @stop
 
 @section('content')
 
-<h1>Report</h1>
+<h1>{{$report->title}}</h1>
 
 
-@foreach($data as $fieldData)
+@foreach($report->data as $fieldData)
 
     <h2> {{$fieldData->field->name}}</h2>
-    @foreach($fieldData->data as $key => $value)
-        
-        <h4>{{$value['name']}}: {{$value['value']}}</h4>
-        
-    @endforeach
-        
-    
+    <table class="table">
+            <tr>
+                <th>Field Name</th>
+                <th>Value</th>
+            </tr>
+        @foreach($fieldData->data as $key => $value)
+            <tr>
+                <td>{{$value['name']}}</td>
+                <td>{{$value['value']}}</td>
+            </tr>
+        @endforeach
+    </table>
+    <hr>
 @endforeach
-@if(empty($data))
+@if(empty($report->data))
     <p><em>No Results are available for this form.</em></p>
 @endif
+
 @stop
 

@@ -71,9 +71,8 @@ class ReportController extends Controller
     public function show($id)
     {
         $report = Report::findOrFail($id);
-        $data = $report->getReportData();
-
-        return view('reports.show', ['data' => $data]);
+        $report->data = $report->getReportData();
+        return view('reports.show', ['report' => $report]);
     }
 
     /**
@@ -113,9 +112,13 @@ class ReportController extends Controller
     public function getOverview($form_id)
     {
         $report = SummaryData::getReport($form_id);
-        $data = $report->getReportData();
-        
-        return view('reports.show', ['data' => $data]);
+        $report->data = $report->getReportData();
+        return view('reports.show', ['report' => $report]);
+    }
 
+    public function getFormReports($form_id)
+    {
+        $form = Form::findOrFail($form_id);
+        return view('reports.form', ['form' => $form]);
     }
 }

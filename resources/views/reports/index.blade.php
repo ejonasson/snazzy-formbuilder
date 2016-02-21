@@ -12,11 +12,7 @@
     <h2>Pre-made Reports</h2>
         @foreach($forms as $form)
             <h3>{{$form->name}}</h3>
-            <ul>
-                <li>
-                    <a href="{{url("/reports/form/{$form->id}/overview")}}">Overview</a>
-                </li>
-            </ul>
+            @include('reports.partials._premade-reports')
         @endforeach
     <ul>
         
