@@ -25,6 +25,11 @@
         <label class="form-description" for="form_description">Form Description</label>
         <textarea class="form-control" name="form_description" id="" cols="30" rows="5">{{$form->description}}</textarea>
     </div>
+
+    <div class="form-group">
+        <label class="form-confirmation" for="form_confirmation">Confirmation Message</label>
+       <textarea class="form-control" name="form_confirmation" id="" cols="30" rows="5">{{$form->confirmation_message}}</textarea>        
+    </div>
     
     <h3>Fields</h3>
     

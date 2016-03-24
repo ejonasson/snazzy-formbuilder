@@ -150,4 +150,10 @@ class Field extends Model
         $single_response->value = $value;
         return $single_response;
     }
+
+    /**
+     * Find this ID in a Request, and assign the position accordingly
+     * @param  FormRequest $request [description]
+     * @return [type]               [description]
+     */
 }

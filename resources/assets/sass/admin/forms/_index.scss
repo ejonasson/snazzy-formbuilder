@@ -1,12 +1,58 @@
 .form-index {
-    .form-permalink {
+    .single-form__permalink {
         margin-left: 10px;
     }
-    .permalink-preview {
-        width: 30%;
+    .single-form__permalink__preview {
+        width: 90%;
         display: inline-block;
         background-color: #ccc;
         border-color: #ccc;
         cursor: pointer;
+    }
+
+    .single-form {
+        @include border-radius(5px);
+        border: 3px solid $border-color;
+
+        @include light-box-shadow;
+        margin-bottom: 10px;
+    }   
+    .single-form__title {
+        width: 100%;
+        background-color: $gray-lighter;
+
+    }
+    .single-form__title h2 {
+        margin-top: 0;
+        margin-left: 0;
+        padding-top: 0;
+        border-bottom: 2px solid $gray-light;
+        @include padding-left-medium;
+        @include padding-top-light;
+        @include padding-bottom-light;
+    }
+
+    .single-form__description {
+        @include padding-top-medium;
+        @include padding-bottom-medium;
+        @include padding-left-medium;
+    }
+
+    .single-form__actions {
+        @include padding-left-medium;
+        list-style-type: none;
+    }
+    .single-form__actions li.single-form__action {
+        display: inline;
+        margin-right: 10px;
+    }
+    #sortable-courses {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    #sortable-courses li {
+        display:inline;
+        margin: 0;
+
     }
 }

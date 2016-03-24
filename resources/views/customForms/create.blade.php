@@ -20,6 +20,12 @@
         <label for="form_description">Form Description</label>
         <textarea class="form-control" name="form_description" id="" cols="20" rows="5"></textarea>
     </div>
+
+    <div class="form-group">
+        <label class="form-confirmation" for="form_confirmation">Confirmation Message</label>
+       <textarea class="form-control" name="form_confirmation" id="" cols="30" rows="5"></textarea>        
+    </div>
+
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Create and Add Fields</button>
     </div>

@@ -9,4 +9,5 @@
         > 
         <label for="fields[@{{field.id}}][rules][required]">Required</label>
     </li>
+
 </ul>

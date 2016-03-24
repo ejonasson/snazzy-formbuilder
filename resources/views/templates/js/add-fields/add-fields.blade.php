@@ -1,7 +1,8 @@
 <div class="fields-js" id="add-fields">
-    
+    <div id="sortable-fields">
     <template v-for="field in fields">
-        <div class="field-data well well-sm field-@{{field.id}}">
+        <div id="field_@{{field.id}}" class="field-data well well-sm field-@{{field.id}}">
+            <input type="hidden" v-model="field.position" name="fields[@{{field.id}}][position]">
             <span class="delete-field"><a v-on:click="deleteField(field.id)">X</a></span>
             <label class="field-label field-name">Field Name</label>
             <input type="text" class ="form-control" name="fields[@{{field.id}}][name]" v-model="field.name">
@@ -23,6 +24,7 @@
             @include('templates/js/add-fields/partials/_field-rules')
         </div>
     </template>
+    </div>
 
     <a class="btn btn-default add-new" id="add_new_field">Add New</a>
 

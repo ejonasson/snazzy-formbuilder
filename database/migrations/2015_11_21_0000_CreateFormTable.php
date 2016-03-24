@@ -1,4 +1,4 @@
-php<?php
+<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +17,7 @@ class CreateFormTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('rules');
+            $table->text('confirmation_message');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

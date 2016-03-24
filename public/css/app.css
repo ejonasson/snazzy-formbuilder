@@ -1396,7 +1396,7 @@ html {
 }
 
 body {
-  font-family: "Alegreya Sans", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   font-size: 18px;
   line-height: 1.428571429;
   color: #333333;
@@ -7455,7 +7455,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Alegreya Sans", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -7589,7 +7589,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Alegreya Sans", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -8313,7 +8313,6 @@ body {
 
 .admin-container {
   background-color: #fff;
-  border-radius: 5px;
   padding-bottom: 20px;
 }
 
@@ -8321,42 +8320,8 @@ body {
   padding-top: 20px;
 }
 
-.form-index .single-form-entry {
-  border-radius: 5px;
-  border: 3px solid #eeeeee;
-  box-shadow: 4px 6px 19px -8px rgba(0, 0, 0, 0.35);
-  margin-bottom: 10px;
-}
-
-.form-index .form-title {
-  width: 100%;
-  background-color: #eeeeee;
-}
-
-.form-index .form-title h2 {
-  margin-top: 0;
-  margin-left: 0;
-  padding-top: 0;
-  border-bottom: 2px solid #777777;
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.form-index .form-description {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
-.form-index .form-actions {
-  padding-left: 10px;
-  list-style-type: none;
-}
-
-.form-index .form-actions li.form-action {
-  display: inline;
-  margin-right: 10px;
+nav.navbar {
+  margin-bottom: 0;
 }
 
 .btn-add-new {
@@ -8403,16 +8368,64 @@ body {
   margin-top: 5px;
 }
 
-.form-index .form-permalink {
+.form-index .single-form__permalink {
   margin-left: 10px;
 }
 
-.form-index .permalink-preview {
-  width: 30%;
+.form-index .single-form__permalink__preview {
+  width: 90%;
   display: inline-block;
   background-color: #ccc;
   border-color: #ccc;
   cursor: pointer;
+}
+
+.form-index .single-form {
+  border-radius: 5px;
+  border: 3px solid #eeeeee;
+  box-shadow: 4px 6px 19px -8px rgba(0, 0, 0, 0.35);
+  margin-bottom: 10px;
+}
+
+.form-index .single-form__title {
+  width: 100%;
+  background-color: #eeeeee;
+}
+
+.form-index .single-form__title h2 {
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 0;
+  border-bottom: 2px solid #777777;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.form-index .single-form__description {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.form-index .single-form__actions {
+  padding-left: 10px;
+  list-style-type: none;
+}
+
+.form-index .single-form__actions li.single-form__action {
+  display: inline;
+  margin-right: 10px;
+}
+
+.form-index #sortable-courses {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.form-index #sortable-courses li {
+  display: inline;
+  margin: 0;
 }
 
 .public-body {

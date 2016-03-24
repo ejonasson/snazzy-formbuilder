@@ -18,6 +18,7 @@ class CreateFieldTable extends Migration
             $table->text('description');
             $table->string('type');
             $table->text('rules');
+            $table->integer('position');
             $table->integer('form_id')->unsigned()->index();
             $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
             $table->timestamps();

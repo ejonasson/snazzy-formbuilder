@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
-    <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     @yield('head')
 </head>
@@ -25,6 +25,7 @@
         <script src="{{ URL::asset('js/vue.js') }}"></script>
         <script  src="{{ URL::asset('js/admin.js') }}"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
 
         @yield('footer')
         

@@ -23,7 +23,7 @@ class Form extends Model
 
     public function getFields()
     {
-        return $this->fields->lists('id');
+        $fields = $this->fields->lists('id');
     }
 
     public function getRules()
@@ -42,7 +42,10 @@ class Form extends Model
         return $this->belongsTo('App\User');
     }
 
-
+    public function getSortedFields()
+    {
+        return $this->fields->sortBy('position');
+    }
 
     /**
      * Prepares the Fields as a JSON object (including fieldOptions)
@@ -52,7 +55,7 @@ class Form extends Model
     public function prepareJsonFields()
     {
         $prepared_fields = array();
-        $form_fields = $this->fields->toArray();
+        $form_fields = $this->getSortedFields()->toArray();
         foreach ($form_fields as $form_field) {
             $field = $this->fields->find($form_field['id']);
 
@@ -79,7 +82,7 @@ class Form extends Model
             $field->description = $request_value['description'];
             $field->type = $request_value['type'];
             $field->form_id = $this->id;
-
+            $field->position = $request_value['position'];
             // Generate a blank Rules Array if needed
             $rules_array = !empty($request_value['rules']) ? $request_value['rules'] : array();
             $rules = new FieldRules($rules_array);
@@ -125,7 +128,7 @@ class Form extends Model
             if (!$field) {
                 continue;
             }
-            $rules = $field->getRules();
+            $rules = !empty($field->getRules()) ? $field->getRules() : [];
             $fieldRules = [];
             foreach ($rules as $rule => $enabled) {
                 if ($enabled) {

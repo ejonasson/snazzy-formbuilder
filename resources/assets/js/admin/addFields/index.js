@@ -1,4 +1,5 @@
 var $ = require("jquery");
+require("jquery-ui");
 var _ = require("underscore");
 var s = require("underscore.string");
 
@@ -7,9 +8,12 @@ if ($('#add-fields').length > 0) {
 
 var addFields = new Vue({
   el: '#add-fields',
-  data: {
-    form: [],
-    fields: []
+  data: function() {
+    return {
+      form: [],
+      fields: [],
+      fieldOrder: []
+    }
   },
   created: function() {
     $.ajaxSetup({
@@ -20,6 +24,12 @@ var addFields = new Vue({
     this.parseData();
     $('#add_new_field').click(this.addEmptyField);
     this.addEmptyField;
+    this.triggerSortable();
+  },
+  computed: {
+    lastFieldPosition: function() {
+      return (this.fields.length);
+    }
   },
   methods: {
     parseData: function() {
@@ -34,9 +44,19 @@ var addFields = new Vue({
         type: 'text',
         fieldOptions: [],
         rules: [],
+        position: this.lastFieldPosition,
         notSaved: true
       };
+
       addFields.fields = addFields.fields.concat(blankField);
+    },
+    triggerSortable: function() {
+      var that = this;
+      $('#sortable-fields').sortable({
+        stop: function(e, ui) {
+          that.updateFieldPositions();
+        }
+      });
     },
     deleteField: function(field_id) {
       if (confirm('Are you sure you would like to delete this field?')) {
@@ -72,6 +92,24 @@ var addFields = new Vue({
       };
       var field = _.findWhere(addFields.fields, {id: field_id}); 
       field.fieldOptions = field.fieldOptions.concat(blankFieldOption);      
+    },
+    updateFieldPositions: function() {
+      // First, get the IDs(in order)
+      var fieldOrder = $('#sortable-fields').sortable('toArray');
+      var fieldArray = [];
+      fieldOrder.forEach(function(fieldId, position) {
+        fieldId = fieldId.split('_');
+        fieldId = fieldId[1];
+        fieldArray.push(fieldId);
+      });
+        
+      this.fields.forEach(function(field, position) {
+        fieldArray.forEach(function (field_position) {
+          if (field_position == field.id) {
+            field.position = fieldArray.indexOf(field_position);
+          }
+        });
+      });
     },
     deleteFieldOption: function(field_id, option_id) {
       if (confirm('Are you sure you would like to delete this field?')) {

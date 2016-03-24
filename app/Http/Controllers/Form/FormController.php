@@ -85,6 +85,7 @@ class FormController extends Controller
         $form->valid_fields = $this->getFieldTypes();
         $form->field_types_with_options = $this->getTypesWithOptions();
         $form->json_form = $form->toJson();
+        $form->getSortedFields();
         $form->json_fields = $form->prepareJsonFields();
         return view('customForms.edit', ['form' => $form]);
 
@@ -133,6 +134,7 @@ class FormController extends Controller
     {
         $form->name = $request->form_name;
         $form->description = $request->form_description;
+        $form->confirmation_message = $request->form_confirmation;
         if (Auth::check()) {
             $form->user_id = Auth::user()->id;
         }

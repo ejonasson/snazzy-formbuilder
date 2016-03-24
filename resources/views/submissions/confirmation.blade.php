@@ -1,5 +1,9 @@
 @extends('templates.public')
 
 @section('content')
-<h1>Your submission has been received!</h1>
+    @if(!empty($form->confirmation_message))
+        <p>{{ $form->confirmation_message }}</p>
+    @else
+        <p>Your submission has been received</p>
+    @endif
 @stop
