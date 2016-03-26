@@ -4,11 +4,11 @@
         <div id="field_@{{field.id}}" class="panel panel-default editable-field field-@{{field.id}}">
             <div class="editable-field__heading panel-heading">
               <div class="editable-field__expandable-toggle">
-                <a href="#" id="expandable-toggle-@{{field.id}}"><i class="fa fa-caret-square-o-down"></i></a>
+                <a href="#" id="expandable-toggle-@{{field.id}}" v-on:click="toggleFieldBody(field.id)"><i id="toggle-icon-@{{field.id}}" class="fa fa-caret-square-o-down"></i></a>
               </div>
               <input type="text" class ="form-control editable-field__text-input editable-field__text-input--header" placeholder="Field Name" name="fields[@{{field.id}}][name]" v-model="field.name">
             </div>
-            <div class="editable-field__body panel-body">
+            <div class="editable-field__body panel-body" id="field-toggle-@{{field.id}}">
               <textarea class="form-control editable-field__textarea"
               name="fields[@{{field.id}}][description]"
               v-model="field.description"
@@ -25,10 +25,13 @@
                   </template>
               <label class="editable-field__field-label">Field Rules</label>
               @include('templates/js/add-fields/partials/_field-rules')
+              <span class="editable-field__delete">
+                <a v-on:click="deleteField(field.id)">
+                  <i class="fa fa-trash"></i> Delete
+                </a>
+              </span>
             </div>
-            <span class="editable-field__delete"><a v-on:click="deleteField(field.id)"><i class="fa fa-trash"></i>
-</a></span>
-        </div>
+          </div>
         <input type="hidden" v-model="field.position" name="fields[@{{field.id}}][position]">
     </template>
     </div>

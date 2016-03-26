@@ -70,6 +70,7 @@ class FormController extends Controller
     public function show($id)
     {
         $form = Form::findOrFail($id);
+        $form->fields = $form->getSortedFields();
         return view('customForms.show', ['form' => $form]);
     }
 
@@ -138,7 +139,7 @@ class FormController extends Controller
         if (Auth::check()) {
             $form->user_id = Auth::user()->id;
         }
-        
+
         return $form;
     }
 

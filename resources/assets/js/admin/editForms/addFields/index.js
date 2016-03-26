@@ -33,8 +33,8 @@ var addFields = new Vue({
   },
   methods: {
     parseData: function() {
-      this.form = JSON.parse($('#form-json').first().text());  
-      this.fields = JSON.parse($('#fields-json').first().text());  
+      this.form = JSON.parse($('#form-json').first().text());
+      this.fields = JSON.parse($('#fields-json').first().text());
     },
     addEmptyField: function(){
       var blankField = {
@@ -53,6 +53,7 @@ var addFields = new Vue({
     triggerSortable: function() {
       var that = this;
       $('#sortable-fields').sortable({
+        placeholder: 'editable-field__placeholder',
         stop: function(e, ui) {
           that.updateFieldPositions();
         }
@@ -73,14 +74,13 @@ var addFields = new Vue({
           success: function(result) {
             $(fieldClass).fadeOut();
           }
-        });          
+        });
        }
-
         // Drop the field from the array.
         var fieldLocation = this.fields.indexOf(field);
         this.fields.splice(fieldLocation, 1);
 
-      } 
+      }
     },
     addFieldOption: function(field_id) {
       var blankFieldOption = {
@@ -90,8 +90,8 @@ var addFields = new Vue({
         field_id: field_id,
         notSaved: true
       };
-      var field = _.findWhere(addFields.fields, {id: field_id}); 
-      field.fieldOptions = field.fieldOptions.concat(blankFieldOption);      
+      var field = _.findWhere(addFields.fields, {id: field_id});
+      field.fieldOptions = field.fieldOptions.concat(blankFieldOption);
     },
     updateFieldPositions: function() {
       // First, get the IDs(in order)
@@ -102,7 +102,7 @@ var addFields = new Vue({
         fieldId = fieldId[1];
         fieldArray.push(fieldId);
       });
-        
+
       this.fields.forEach(function(field, position) {
         fieldArray.forEach(function (field_position) {
           if (field_position == field.id) {
@@ -126,14 +126,12 @@ var addFields = new Vue({
             success: function(result) {
               $(fieldOptionClass).fadeOut();
             }
-          });    
+          });
         }
-
          // Drop the field from the array.
          var fieldOptionLocation = field.fieldOptions.indexOf(fieldOption);
-         field.fieldOptions.splice(fieldOptionLocation, 1);       
-
-       } 
+         field.fieldOptions.splice(fieldOptionLocation, 1);
+       }
      },
     // Check if a Field is elligible to have options
     fieldHasOptions: function(field_id) {
@@ -148,6 +146,19 @@ var addFields = new Vue({
     capitalizeString: function(string) {
       var str = s(string).capitalize().value();
       return str;
+    },
+
+    toggleFieldBody: function(field_id) {
+      var fieldString = '#field-toggle-' + field_id;
+      var toggleIcon = '#toggle-icon-' + field_id;
+      $(fieldString).slideToggle();
+      if ($(toggleIcon).hasClass('fa-caret-square-o-down')) {
+        $(toggleIcon).removeClass('fa-caret-square-o-down');
+        $(toggleIcon).addClass('fa-caret-square-o-up');
+      } else {
+        $(toggleIcon).removeClass('fa-caret-square-o-up');
+        $(toggleIcon).addClass('fa-caret-square-o-down');
+      }
     }
   }
 });

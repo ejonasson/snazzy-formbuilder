@@ -5,31 +5,14 @@
     .single-form__permalink__preview {
         width: 90%;
         display: inline-block;
-        background-color: #ccc;
-        border-color: #ccc;
+        background-color: $gray-lighter;
+        border-color: $gray-lighter;
         cursor: pointer;
     }
 
-    .single-form {
-        @include border-radius(5px);
-        border: 3px solid $border-color;
-
-        @include light-box-shadow;
-        margin-bottom: 10px;
-    }   
-    .single-form__title {
-        width: 100%;
-        background-color: $gray-lighter;
-
-    }
-    .single-form__title h2 {
-        margin-top: 0;
-        margin-left: 0;
-        padding-top: 0;
-        border-bottom: 2px solid $gray-light;
-        @include padding-left-medium;
-        @include padding-top-light;
-        @include padding-bottom-light;
+    .single-form__title h3 {
+      margin: 0;
+      padding: 0;
     }
 
     .single-form__description {

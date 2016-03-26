@@ -5759,13 +5759,19 @@ html, body {
 
 .admin-container {
   background-color: #fff;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 4px; }
 
 .auth-container {
   padding-top: 20px; }
 
 nav.navbar {
   margin-bottom: 0; }
+
+.submission-received {
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 .btn-add-new {
   margin-top: 10px; }
@@ -5822,34 +5828,28 @@ nav.navbar {
   .editable-field__delete a {
     color: red; }
 
+.editable-field__heading {
+  cursor: move; }
+
+.editable-field__placeholder {
+  height: 100px;
+  margin: 10px;
+  background-color: #eeeeee;
+  border-radius: 4px; }
+
 .form-index .single-form__permalink {
   margin-left: 10px; }
 
 .form-index .single-form__permalink__preview {
   width: 90%;
   display: inline-block;
-  background-color: #ccc;
-  border-color: #ccc;
+  background-color: #eeeeee;
+  border-color: #eeeeee;
   cursor: pointer; }
 
-.form-index .single-form {
-  border-radius: 5px;
-  border: 3px solid #eeeeee;
-  box-shadow: 4px 6px 19px -8px rgba(0, 0, 0, 0.35);
-  margin-bottom: 10px; }
-
-.form-index .single-form__title {
-  width: 100%;
-  background-color: #eeeeee; }
-
-.form-index .single-form__title h2 {
-  margin-top: 0;
-  margin-left: 0;
-  padding-top: 0;
-  border-bottom: 2px solid #777777;
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px; }
+.form-index .single-form__title h3 {
+  margin: 0;
+  padding: 0; }
 
 .form-index .single-form__description {
   padding-top: 10px;

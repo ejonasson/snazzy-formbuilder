@@ -63,6 +63,7 @@
 .editable-field__expandable-toggle {
   float: right;
 }
+
 .editable-field__text-input--header {
   border: 0;
   width: 90%;
@@ -77,4 +78,14 @@
   a {
       color: $color-red;
   }
+}
+.editable-field__heading {
+  cursor: move;
+}
+
+.editable-field__placeholder {
+  height: 100px;
+  margin: 10px;
+  background-color: $gray-lighter;
+  border-radius: $border-radius-base;
 }

@@ -30060,6 +30060,7 @@ if ($('#add-fields').length > 0) {
       triggerSortable: function triggerSortable() {
         var that = this;
         $('#sortable-fields').sortable({
+          placeholder: 'editable-field__placeholder',
           stop: function stop(e, ui) {
             that.updateFieldPositions();
           }
@@ -30081,7 +30082,6 @@ if ($('#add-fields').length > 0) {
               }
             });
           }
-
           // Drop the field from the array.
           var fieldLocation = this.fields.indexOf(field);
           this.fields.splice(fieldLocation, 1);
@@ -30133,7 +30133,6 @@ if ($('#add-fields').length > 0) {
               }
             });
           }
-
           // Drop the field from the array.
           var fieldOptionLocation = field.fieldOptions.indexOf(fieldOption);
           field.fieldOptions.splice(fieldOptionLocation, 1);
@@ -30152,6 +30151,19 @@ if ($('#add-fields').length > 0) {
       capitalizeString: function capitalizeString(string) {
         var str = s(string).capitalize().value();
         return str;
+      },
+
+      toggleFieldBody: function toggleFieldBody(field_id) {
+        var fieldString = '#field-toggle-' + field_id;
+        var toggleIcon = '#toggle-icon-' + field_id;
+        $(fieldString).slideToggle();
+        if ($(toggleIcon).hasClass('fa-caret-square-o-down')) {
+          $(toggleIcon).removeClass('fa-caret-square-o-down');
+          $(toggleIcon).addClass('fa-caret-square-o-up');
+        } else {
+          $(toggleIcon).removeClass('fa-caret-square-o-up');
+          $(toggleIcon).addClass('fa-caret-square-o-down');
+        }
       }
     }
   });

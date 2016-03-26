@@ -10,6 +10,9 @@
     background-color: $container-bg;
     padding-bottom: 20px;
 
+    margin-top: 20px;
+    border-radius: $border-radius-base;
+
 }
 
 .auth-container {
@@ -22,6 +25,10 @@ nav.navbar {
 
 // Admin Views
 
+.submission-received {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
 
 // Buttons
