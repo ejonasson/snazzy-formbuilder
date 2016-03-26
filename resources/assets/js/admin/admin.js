@@ -1,16 +1,19 @@
 "use strict";
 
 Vue.config.debug = true;
-require('jquery');
+var $ = require('jquery');
+var bootstrap = require('bootstrap');
 
 var adminVue = new Vue({
     el: '#admin',
     components: {
-        addFields: require('./addFields'),
-        showForms: require('./showForms'),
-        addReportFields: require('./addReportFields')
+      editForms: require('./editForms'),
+      showForms: require('./showForms'),
+      addReportFields: require('./addReportFields')
     },
     created: function() {
+      // Enable Bootstrap Tooltips
+      $('[data-toggle="tooltip"]').tooltip()
     },
     methods: {
     }

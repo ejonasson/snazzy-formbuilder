@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require('laravel-elixir-livereload');
 
 /*
  |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ elixir(function(mix) {
     mix.browserify('admin/admin.js');
     mix.browserify('public/public.js');
 });
+
+elixir(function(mix) {
+  mix.livereload();
+})

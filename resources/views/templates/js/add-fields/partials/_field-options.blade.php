@@ -1,6 +1,6 @@
 <template v-for="option in field.fieldOptions">
     <div class="field-options-wrapper field-option-@{{option.id}}">
-        <div class="delete-field"><a v-on:click="deleteFieldOption(field.id, option.id)">X</a></div>
+        <div class="delete-field"><a v-on:click="deleteFieldOption(field.id, option.id)">&times;</a></div>
         <input
         type="text"
         class="form-control field-options"

@@ -29,16 +29,52 @@
 
             .delete-field {
                 margin-top: 8px;
-            }            
+            }
         }
 
         .delete-field {
-            float: right;
             cursor: pointer;
+        }
+
+        .expandable-toggle {
+            float: right;
         }
 
         label.field-label {
             margin-top: 5px;
         }
 
+}
+
+.form-tab {
+  border-right: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  padding: 5px 10px;
+
+  margin-bottom: 10px;
+}
+
+// Component SASS For Adding/Editing Field Options
+
+.editable-field {
+}
+.editable-field__expandable-toggle {
+  float: right;
+}
+.editable-field__text-input--header {
+  border: 0;
+  width: 90%;
+}
+
+.editable-field__delete {
+  position: relative;
+  cursor: pointer;
+  right: -10px;
+  bottom: 5px;
+
+  a {
+      color: $color-red;
+  }
 }
